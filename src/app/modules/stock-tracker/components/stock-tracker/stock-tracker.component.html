@@ -20,6 +20,9 @@
           <mat-error *ngIf="stockForm.get('symbol')?.hasError('maxlength')">
             Stock symbol must be at most 5 characters long
           </mat-error>
+          <mat-error *ngIf="stockForm.get('symbol')?.hasError('duplicate')">
+            Stock symbol is already tracked
+          </mat-error>
         </mat-form-field>
         <button id="trackBtn" mat-raised-button color="primary" (click)="addSymbol()" [disabled]="!stockForm.valid">Track Stock</button>
       </form>
@@ -27,7 +30,7 @@
     </mat-card-actions>
   </mat-card>
 
-  <!-- Display stock companies -->
+  <!-- Display stock information about companies -->
   <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="50px">
 
     <mat-card li *ngFor="let symbol of symbols">

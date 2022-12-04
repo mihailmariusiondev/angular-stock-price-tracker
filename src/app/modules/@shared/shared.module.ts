@@ -14,7 +14,6 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
-    // ScrollingModule,
   ],
   exports: [
     CommonModule,
@@ -22,7 +21,6 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
-    // ScrollingModule,
   ]
 })
 export class SharedModule { }
