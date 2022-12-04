@@ -1,0 +1,48 @@
+<div class="stock-tracker-container" fxLayout="column" fxLayoutAlign="space-between center" fxLayoutGap="50px">
+
+  <!-- Stock tracker form -->
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title> {{'Stock Tracker' | uppercase}} </mat-card-title>
+      <mat-card-subtitle>Enter the symbol of a stock to trag (i.e. AAPL., TSLA., GOOGL)</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-actions>
+
+      <form [formGroup]="stockForm" fxLayout="row" fxLayoutAlign="space-around center" fxLayoutGap="50px">
+        <mat-form-field>
+          <input id="stockInput" matInput placeholder="Enter stock symbol" formControlName="symbol" />
+          <mat-error *ngIf="stockForm.get('symbol')?.hasError('required')">
+            Stock symbol is required
+          </mat-error>
+          <mat-error *ngIf="stockForm.get('symbol')?.hasError('minlength')">
+            Stock symbol must be at least 1 character long
+          </mat-error>
+          <mat-error *ngIf="stockForm.get('symbol')?.hasError('maxlength')">
+            Stock symbol must be at most 5 characters long
+          </mat-error>
+        </mat-form-field>
+        <button id="trackBtn" mat-raised-button color="primary" (click)="addSymbol()" [disabled]="!stockForm.valid">Track Stock</button>
+      </form>
+
+    </mat-card-actions>
+  </mat-card>
+
+  <!-- Display stock companies -->
+  <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="50px">
+
+    <mat-card li *ngFor="let symbol of symbols">
+      <mat-card-header>
+        <mat-card-title>{{symbol}}</mat-card-title>
+        <mat-card-subtitle>Text</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button>See sentiment details</button>
+      </mat-card-actions>
+    </mat-card>
+
+  </div>
+
+</div>
