@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
-import { combineLatest, Observable } from 'rxjs';
+import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { company } from '../../models/company';
 import { quote } from '../../models/quote';
 import { StockTrackerService } from '../services/stock-tracker.service';
@@ -19,8 +19,7 @@ export class StockTrackerComponent implements OnInit {
     symbol: new FormControl('', [Validators.required, Validators.minLength(1), Validators.maxLength(5), this.duplicateSymbolValidator]),
   });
 
-  companyStockCombined$!: Observable<any>;
-  companiesAndQuotes: companyAndQuote[] = []
+  companyStockCombined: companyAndQuote[] = []
 
   constructor(private stockTrackerService: StockTrackerService) {}
 
@@ -32,7 +31,7 @@ export class StockTrackerComponent implements OnInit {
   getSymbols() {
     let localStorageSymbols = localStorage.getItem('companiesAndQuotes');
     if (localStorageSymbols) {
-      this.companiesAndQuotes = JSON.parse(localStorageSymbols);
+      this.companyStockCombined = JSON.parse(localStorageSymbols) as companyAndQuote[];
     }
   }
 
@@ -44,17 +43,20 @@ export class StockTrackerComponent implements OnInit {
     let quote$ = this.stockTrackerService.getQuote(stockSymbol)
 
     // Combine the latest values emitted by quote$ and company$
-    this.companyStockCombined$ = combineLatest([company$, quote$]);
-
-    this.companyStockCombined$.subscribe(([quote, company]) => {
+    combineLatest([company$, quote$]).subscribe(([quote, company]) => {
       const companyAndQuote: companyAndQuote = Object.assign({}, quote, company);
 
       // Push the new symbol to the list of symbols and save it to local storage
-      this.companiesAndQuotes = [...this.companiesAndQuotes, companyAndQuote]
-      localStorage.setItem('companiesAndQuotes', JSON.stringify(this.companiesAndQuotes));
+      this.companyStockCombined = [...this.companyStockCombined, companyAndQuote]
+      localStorage.setItem('companiesAndQuotes', JSON.stringify(this.companyStockCombined));
+
       this.stockForm.reset();
     });
+  }
 
+  removeSymbol(symbol: string) {
+    this.companyStockCombined = this.companyStockCombined.filter(companyAndQuote => companyAndQuote.symbol !== symbol);
+    localStorage.setItem('companiesAndQuotes', JSON.stringify(this.companyStockCombined));
   }
 
   // Check if the symbol is already in local storage
@@ -64,7 +66,7 @@ export class StockTrackerComponent implements OnInit {
     let symbols: companyAndQuote[] = localStorageSymbols ? JSON.parse(localStorageSymbols) : [];
 
     // Check if the symbol is already in the companiesAndQuotes array
-    if (symbols.some(s => s.symbol === control.value)) {
+    if (symbols.some(s => s.symbol === control.value.toUpperCase())) {
       return { duplicate: true };
     }
     return null;
