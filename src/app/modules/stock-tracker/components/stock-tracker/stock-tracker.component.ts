@@ -67,13 +67,11 @@ export class StockTrackerComponent implements OnInit {
     }
   }
 
-  // Check if the symbol is already in local storage
   duplicateSymbolValidator(control: FormControl) {
     if (!control.value) return null;
     let localStorageSymbols = localStorage.getItem('companiesAndQuotes');
     let symbols: companyAndQuote[] = localStorageSymbols ? JSON.parse(localStorageSymbols) : [];
 
-    // Check if the symbol is already in the companiesAndQuotes array
     if (symbols.find(s => s.symbol === control.value.toUpperCase())) {
       return { duplicate: true };
     }

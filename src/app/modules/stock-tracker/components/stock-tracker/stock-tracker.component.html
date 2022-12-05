@@ -1,92 +1,62 @@
-<div class="stock-tracker-container" fxLayout="column" fxLayoutAlign="space-between center" fxLayoutGap="25px">
+<div class="stock-tracker-container" fxLayout="column" fxLayoutAlign="space-between center" fxLayoutGap="30px">
 
-  <!-- Stock tracker form -->
-  <mat-card>
-    <mat-card-header>
-      <mat-card-title> {{'Stock Tracker' | uppercase}} </mat-card-title>
-      <mat-card-subtitle>Enter the symbol of a stock to trag (i.e. AAPL., TSLA., GOOGL)</mat-card-subtitle>
-    </mat-card-header>
-    <mat-card-actions>
+  <mat-card style="padding: 10px; width: 100%; margin-top: 20px;">
 
-      <form [formGroup]="stockForm" fxLayout="row" fxLayoutAlign="space-around center" fxLayoutGap="50px">
-        <mat-form-field>
-          <input id="stockInput" matInput placeholder="Enter stock symbol" formControlName="symbol" />
-          <mat-error *ngIf="stockForm.get('symbol')?.hasError('required')">
-            Stock symbol is required
-          </mat-error>
-          <mat-error *ngIf="stockForm.get('symbol')?.hasError('minlength')">
-            Stock symbol must be at least 1 character long
-          </mat-error>
-          <mat-error *ngIf="stockForm.get('symbol')?.hasError('maxlength')">
-            Stock symbol must be at most 5 characters long
-          </mat-error>
-          <mat-error *ngIf="stockForm.get('symbol')?.hasError('duplicate')">
-            Stock symbol is already tracked
-          </mat-error>
-          <mat-error *ngIf="stockForm.get('symbol')?.hasError('whitespace')">
-            Stock symbol cannot contain leading or trailing whitespace
-          </mat-error>
-        </mat-form-field>
+    <div fxLayout="row" fxFlex="100%" fxLayoutAlign="center center" fxLayoutGap="10px">
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <mat-card-title> {{'Stock Tracker' | uppercase}} </mat-card-title>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <mat-card-subtitle>Enter the symbol of a stock to trag (i.e. AAPL., TSLA., GOOGL)</mat-card-subtitle>
+      </div>
+    </div>
+
+    <div fxLayout="row" fxFlex="100%" fxLayoutAlign="center center" fxLayoutGap="20px" style="margin-top: 20px;">
+
+      <div fxLayout="column" fxFlex="70%" fxLayoutAlign="center center" fxLayoutGap="10px">
+        <form [formGroup]="stockForm" fxLayout="row" fxLayoutAlign="space-around center" fxLayoutGap="50px">
+          <mat-form-field>
+            <input id="stockInput" matInput placeholder="Enter stock symbol" formControlName="symbol" />
+            <mat-error *ngIf="stockForm.get('symbol')?.hasError('required')">
+              Stock symbol is required
+            </mat-error>
+            <mat-error *ngIf="stockForm.get('symbol')?.hasError('minlength')">
+              Stock symbol must be at least 1 character long
+            </mat-error>
+            <mat-error *ngIf="stockForm.get('symbol')?.hasError('maxlength')">
+              Stock symbol must be at most 5 characters long
+            </mat-error>
+            <mat-error *ngIf="stockForm.get('symbol')?.hasError('duplicate')">
+              Stock symbol is already tracked
+            </mat-error>
+            <mat-error *ngIf="stockForm.get('symbol')?.hasError('whitespace')">
+              Stock symbol cannot contain leading or trailing whitespace
+            </mat-error>
+          </mat-form-field>
+        </form>
+      </div>
+
+      <div fxLayout="column" fxFlex="30%" fxLayoutAlign="center center" fxLayoutGap="10px">
         <button id="trackBtn" mat-raised-button color="primary" (click)="addSymbol()" [disabled]="!stockForm.valid">Track Stock</button>
-      </form>
+      </div>
+    </div>
 
-    </mat-card-actions>
   </mat-card>
 
 
-  <!-- Display stock information about companies -->
-  <mat-card *ngFor="let company of companyStockCombined">
-
-    <!-- Card header -->
-    <mat-card-header>
-      <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="10px">
-        <div fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="5px">
-          <mat-card-title> ({{company?.symbol}}) {{company.description}}</mat-card-title>
-        </div>
-        <div fxLayout="column" fxLayoutAlign="end center" fxLayoutGap="5px">
-          <button id="{{'remove' + (company?.symbol | uppercase)}}" mat-button (click)="removeSymbol(company.symbol)">
-            <mat-icon>close</mat-icon>
-          </button>
-        </div>
-      </div>
-    </mat-card-header>
-
-    <!-- Card content -->
-    <mat-card-content>
-      <div fxLayout="row" fxLayoutAlign="space-around center" fxLayoutGap="10px">
-
-        <div fxFlex="80%" fxLayout="column" fxLayoutGap="20px">
-          <div fxLayout="row" fxLayoutAlign="space-between center">
-            <span fxFlex="50%"><b>Change today:</b> <br>{{company.d | number:'1.0-2'}}% </span>
-            <span fxFlex="50%"><b>Opening price:</b> <br>{{company.o | currency}} </span>
-          </div>
-          <div fxLayout="row" fxLayoutAlign="space-between center">
-            <span fxFlex="50%"><b>Current price:</b> <br>{{company.c | currency}} </span>
-            <span fxFlex="50%"><b>High price:</b> <br>{{company.h | currency}} </span>
-          </div>
-        </div>
-
-        <div fxFlex="20%" fxLayout="column" fxLayoutAlign="center center">
-            <div [ngSwitch]="company.d > 0">
-            <div *ngSwitchCase="true">
-              <mat-icon color="primary" class="icon-trending">trending_up</mat-icon>
-            </div>
-            <p *ngSwitchCase="false">
-              <mat-icon color="warn" class="icon-trending">trending_down</mat-icon>
-            </p>
-            <p *ngSwitchDefault>
-              <mat-icon color="accent" class="icon-trending">trending_flat</mat-icon>
-            </p>
-            </div>
-        </div>
-      </div>
-    </mat-card-content>
-
-    <!-- Card actions -->
-    <mat-card-actions>
-      <button mat-button id="{{'sentiment' + (company?.symbol | uppercase)}}">See sentiment details</button>
-    </mat-card-actions>
-  </mat-card>
+  <div fxFill fxLayout="row wrap">
+    <div
+      *ngFor="let company of companyStockCombined"
+      fxFlex="25"
+      fxFlex.md="33"
+      fxFlex.sm="50"
+      fxFlex.xs="100"
+      fxLayout="column"
+      class="company-container"
+    >
+    <app-company-stock [company]="company" (removeEvent)="removeSymbol($event)"></app-company-stock>
+    </div>
+  </div>
 
 
 </div>
