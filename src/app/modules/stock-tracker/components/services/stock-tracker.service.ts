@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
+import { quote } from '../../models/quote';
+import { company } from '../../models/company';
 
 @Injectable({
   providedIn: 'root'
@@ -12,24 +14,26 @@ export class StockTrackerService {
 
   constructor(private http: HttpClient) { }
 
-  getQuote(symbol: string): Observable<any> {
+  getQuote(symbol: string): Observable<quote> {
     return this.http.get(`${this.API_BASE_URL}/quote`, {
       params: {
         token: this.API_KEY,
         symbol
       }
-    });
+    }).pipe(
+      tap(console.log)
+    );
   }
 
-  getCompanyName(symbol: string): Observable<string> {
-    return this.http.get(`${this.API_BASE_URL}/stock/symbol`, {
+  getCompanyName(symbol: string): Observable<company> {
+    return this.http.get(`${this.API_BASE_URL}/search`, {
       params: {
         token: this.API_KEY,
-        exchange: 'US',
-        symbol
+        q: symbol
       }
     }).pipe(
-      map((data: any) => data[0].name)
+      map((data: any) => data.result[0]),
+      tap(console.log)
     );
   }
 }
