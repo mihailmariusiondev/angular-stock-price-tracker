@@ -69,13 +69,13 @@
         <div fxFlex="20%" fxLayout="column" fxLayoutAlign="center center">
             <div [ngSwitch]="company.d > 0">
             <div *ngSwitchCase="true">
-              <mat-icon color="primary">trending_up</mat-icon>
+              <mat-icon color="primary" class="icon-trending">trending_up</mat-icon>
             </div>
             <p *ngSwitchCase="false">
-              <mat-icon color="warn">trending_down</mat-icon>
+              <mat-icon color="warn" class="icon-trending">trending_down</mat-icon>
             </p>
             <p *ngSwitchDefault>
-              <mat-icon color="accent">trending_flat</mat-icon>
+              <mat-icon color="accent" class="icon-trending">trending_flat</mat-icon>
             </p>
             </div>
         </div>

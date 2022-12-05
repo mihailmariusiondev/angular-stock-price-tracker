@@ -39,7 +39,7 @@ export class StockTrackerComponent implements OnInit {
 
   addSymbol() {
     const stockSymbol = this.stockForm.value.symbol?.toUpperCase();
-    console.log(stockSymbol)
+    console.log(stockSymbol);
     if (!stockSymbol) return;
 
     let company$ = this.stockTrackerService.getCompanyName(stockSymbol).pipe(take(1));
@@ -47,15 +47,15 @@ export class StockTrackerComponent implements OnInit {
 
     combineLatest([company$, quote$])
       .pipe(
-      tap(([quote, company]) => {
-        const companyAndQuote : companyAndQuote = {...quote, ...company};
-        this.companyStockCombined = [...this.companyStockCombined, companyAndQuote];
-      }),
+        tap(([quote, company]) => {
+          const companyAndQuote: companyAndQuote = { ...quote, ...company };
+          this.companyStockCombined = [...this.companyStockCombined, companyAndQuote];
+          localStorage.setItem(this.localStorageKey, JSON.stringify(this.companyStockCombined));
+          this.stockForm.reset();
+        })
       )
-      .subscribe(() => {
-        localStorage.setItem(this.localStorageKey, JSON.stringify(this.companyStockCombined));
-        this.stockForm.reset();
-      });
+      .subscribe();
+    ;
   }
 
 
@@ -82,7 +82,7 @@ export class StockTrackerComponent implements OnInit {
 
   public noWhiteSpaceValidator(control: FormControl) {
     const isSpace = (control.value || '').match(/\s/g);
-    return isSpace ? {whitespace: true} : null;
-}
+    return isSpace ? { whitespace: true } : null;
+  }
 
 }
