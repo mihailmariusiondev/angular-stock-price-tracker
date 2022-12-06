@@ -4,11 +4,11 @@
   <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="30px">
     <!-- Element 1 -->
     <div fxLayout="column" fxLayoutGap="10px" fxFlex="80%">
-      <mat-card-title class="company-stock-title" > ({{company?.symbol}}) {{company.description}}</mat-card-title>
+      <mat-card-title class="company-stock-title" > ({{company.symbol}}) {{company.description}}</mat-card-title>
     </div>
     <!-- Element 2 -->
     <div fxLayout="column" fxLayoutGap="10px">
-      <button id="{{'remove' + (company?.symbol | uppercase)}}" mat-button (click)="removeSymbol(company.symbol)">
+      <button id="{{'remove' + (company.symbol | uppercase)}}" mat-button (click)="removeSymbol(company.symbol)">
         <mat-icon>close</mat-icon>
       </button>
     </div>
@@ -39,7 +39,7 @@
   <!-- Card actions -->
   <mat-card-actions>
     <div fxLayout="row" fxLayoutAlign="end center" fxFlex="100%">
-      <button mat-button id="{{'sentiment' + (company?.symbol | uppercase)}}" [routerLink]="['/stock-tracker/sentiment', company?.symbol]" [queryParams]="{ companyName: company.description}">See sentiment
+      <button mat-button id="{{'sentiment' + (company.symbol | uppercase)}}" [routerLink]="['/stock-tracker/sentiment', company.symbol]" [queryParams]="{ companyName: company.description}">See sentiment
         details</button>
       <mat-icon>chevron_right</mat-icon>
     </div>

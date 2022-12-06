@@ -11,7 +11,6 @@ import { StockTrackerService } from '../services/stock-tracker.service';
 })
 export class StockTrackerComponent implements OnInit {
 
-  // Our stock tracker form
   stockForm: FormGroup;
   companyStockCombined: companyAndQuote[] = [];
   localStorageKey = 'companiesAndQuotes';
@@ -26,7 +25,6 @@ export class StockTrackerComponent implements OnInit {
     this.getSymbols();
   }
 
-  // Load the symbols from local storage, if they exist
   getSymbols() {
     let localStorageSymbols = localStorage.getItem(this.localStorageKey);
     if (localStorageSymbols) {
