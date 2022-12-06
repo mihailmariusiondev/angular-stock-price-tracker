@@ -5,6 +5,8 @@ import { SharedModule } from "./modules/@shared/shared.module";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { CoreModule } from "./modules/@core/core.module";
+import { HTTP_INTERCEPTORS } from "@angular/common/http";
+import { LoadingInterceptor } from "./modules/@core/interceptors/loading.interceptor";
 
 @NgModule({
   declarations: [
@@ -17,7 +19,11 @@ import { CoreModule } from "./modules/@core/core.module";
     SharedModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

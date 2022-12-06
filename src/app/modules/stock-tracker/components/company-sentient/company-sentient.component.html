@@ -13,7 +13,7 @@
       <mat-card fxLayout="column" [fxFlex]="sentiments.length == 1 ? '100%' : sentiments.length == 2 ? '50%' : '33%'" class="sentiment-item" *ngFor="let sentiment of sentiments">
         <div fxLayout="row">
 
-          <div fxLayout="column" fxFlex="65%" fxLayoutGap="25px" style="padding: 20px;">
+          <div fxLayout="column" fxFlex="65%" fxLayoutGap="15px" style="padding: 20px;">
             <div fxLayout="row" fxFlexFil>
               <span style="font-size: 20px;"><b>{{ (monthNames[sentiment.month - 1] + ' ' + sentiment.year.toString()) }}</b></span>
             </div>
