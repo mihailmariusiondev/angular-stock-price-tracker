@@ -10,7 +10,7 @@ import { StockTrackerService } from '../services/stock-tracker.service';
 })
 export class CompanySentientComponent implements OnInit {
 
-  sentiment: Sentiment[] = [];
+  sentiments: Sentiment[] = [];
   symbol: string = '';
   companyName: string = '';
 
@@ -28,7 +28,7 @@ export class CompanySentientComponent implements OnInit {
     if (this.symbol) {
       this.stockTrackerService.getSentiment(this.symbol)
         .subscribe(sentiment => {
-          this.sentiment = sentiment;
+          this.sentiments = sentiment;
         });
     }
   }

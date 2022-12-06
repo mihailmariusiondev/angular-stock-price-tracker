@@ -1,48 +1,45 @@
 <div fxLayout="column">
 
   <!-- Card -->
-  <mat-card fxLayout="column" class="company-sentient-card">
+  <div fxLayout="column" fxFlex="80%" class="company-sentient-card">
 
     <!-- Card title -->
     <div fxLayout="row" fxFlexFill fxLayoutAlign="center center">
-      <mat-card-title> {{companyName}} </mat-card-title>
+      <h1> {{companyName}} </h1>
     </div>
 
     <!-- Card content -->
-    <div fxLayout="row" fxFlexFill fxLayoutAlign="center center"  class="sentiment-grid">
-      <div fxLayout="column" [fxFlex]="isLast ? '100%' : '33%'" fxLayoutAlign="center center" class="sentiment-item" *ngFor="let item of sentiment; last as isLast">
+    <div fxLayout="row" fxFlexFill fxLayoutAlign="center center" class="sentiment-grid">
+      <mat-card fxLayout="column" [fxFlex]="sentiments.length == 1 ? '100%' : sentiments.length == 2 ? '50%' : '33%'" class="sentiment-item" *ngFor="let sentiment of sentiments">
+        <div fxLayout="row">
 
-        <div fxLayout="row" fxLayoutAlign="center center" >
-          <div fxLayout="column" fxLayoutAlign="center center" fxFlex="80%">
-
+          <div fxLayout="column" fxFlex="65%" fxLayoutGap="20px" style="padding: 20px;">
             <div fxLayout="row" fxFlexFil>
-              <p>{{ (item.month.toString().padStart(2, '0') + '-' + item.year.toString()) }}</p>
+              <span style="font-size: 20px;"><b>{{ (sentiment.month.toString().padStart(2, '0') + '-' + sentiment.year.toString()) }}</b></span>
             </div>
             <div fxLayout="row" fxFlexFil>
-              <p>Change: {{ item.change }}</p>
+              <span>Change: {{ sentiment.change }}</span>
             </div>
             <div fxLayout="row" fxFlexFil>
-              <p>Mspr: {{ item.mspr }}</p>
+              <span>Mspr: {{ sentiment.mspr }}</span>
             </div>
           </div>
 
-          <div fxLayout="column" fxLayoutAlign="center center" fxFlex="20%">
-
-            <p *ngIf="item.change > 0">
-              <mat-icon>arrow_upward</mat-icon>
-            </p>
-            <p *ngIf="item.change < 0">
-              <mat-icon>arrow_downward</mat-icon>
-            </p>
+          <div fxFlex="35%" fxLayout="column" fxLayoutAlign="center center">
+            <div [ngSwitch]="sentiment.change > 0">
+              <mat-icon *ngSwitchCase="true" color="primary" class="icon-trending">trending_up</mat-icon>
+              <mat-icon *ngSwitchCase="false" color="warn" class="icon-trending">trending_down</mat-icon>
+            </div>
           </div>
         </div>
-
-      </div>
+      </mat-card>
     </div>
-  </mat-card>
 
-  <div fxLayout="row" fxLayoutAlign="start center" fxFlex="100%">
-    <mat-icon>chevron_left</mat-icon>
-    <button mat-button (click)="goBack()">Back</button>
+    <div fxLayout="row" fxLayoutAlign="start center" fxFlex="100%">
+      <mat-icon>chevron_left</mat-icon>
+      <button mat-button (click)="goBack()">Back</button>
+    </div>
+
   </div>
+
 </div>

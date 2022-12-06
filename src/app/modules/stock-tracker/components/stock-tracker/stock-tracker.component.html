@@ -44,11 +44,9 @@
 
   <!-- Companies stock -->
   <div fxFill fxLayout="row wrap">
-    <div *ngFor="let company of companyStockCombined" fxFlex="25" fxFlex.md="33" fxFlex.sm="50" fxFlex.xs="100" fxLayout="column" class="company-stock-container">
+    <div fxFlex="25" fxFlex.md="33" fxFlex.sm="50" fxFlex.xs="100" fxLayout="column" class="company-stock-container" *ngFor="let company of companyStockCombined">
       <app-company-stock [company]="company" (removeEvent)="removeSymbol($event)"></app-company-stock>
     </div>
   </div>
 
 </div>
-
-<router-outlet></router-outlet>
