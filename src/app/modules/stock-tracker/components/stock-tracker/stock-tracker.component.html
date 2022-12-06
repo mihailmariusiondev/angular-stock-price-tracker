@@ -1,20 +1,21 @@
-<div class="stock-tracker-container" fxLayout="column" fxLayoutAlign="space-between center" fxLayoutGap="30px">
+<div fxLayout="column">
 
-  <mat-card style="padding: 10px; width: 100%; margin-top: 20px;">
+  <!-- Stock tracker -->
+  <mat-card class="stock-tracker-container" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="20px">
 
-    <div fxLayout="row" fxFlex="100%" fxLayoutAlign="center center" fxLayoutGap="10px">
-      <div fxLayout="row" fxLayoutAlign="start center">
-        <mat-card-title> {{'Stock Tracker' | uppercase}} </mat-card-title>
-      </div>
-      <div fxLayout="row" fxLayoutAlign="start center">
-        <mat-card-subtitle>Enter the symbol of a stock to trag (i.e. AAPL., TSLA., GOOGL)</mat-card-subtitle>
-      </div>
+    <!-- Stock tracker title -->
+    <div fxLayout="row" fxFlexFill fxLayoutAlign="center center">
+      <mat-card-title> {{'Stock Tracker' | uppercase}} </mat-card-title>
     </div>
 
-    <div fxLayout="row" fxFlex="100%" fxLayoutAlign="center center" fxLayoutGap="20px" style="margin-top: 20px;">
+    <!-- Stock tracker subtitle -->
+    <div fxLayout="row" fxFlexFill fxLayoutAlign="center center">
+      <mat-card-subtitle>Enter the symbol of a stock to trag (i.e. AAPL., TSLA., GOOGL)</mat-card-subtitle>
+    </div>
 
-      <div fxLayout="column" fxFlex="70%" fxLayoutAlign="center center" fxLayoutGap="10px">
-        <form [formGroup]="stockForm" fxLayout="row" fxLayoutAlign="space-around center" fxLayoutGap="50px">
+    <!-- Stock tracker form -->
+    <div fxLayout="row" fxFlexFill fxLayoutGap="50px" fxLayoutAlign="center center" class="form-container">
+        <form [formGroup]="stockForm">
           <mat-form-field>
             <input id="stockInput" matInput placeholder="Enter stock symbol" formControlName="symbol" />
             <mat-error *ngIf="stockForm.get('symbol')?.hasError('required')">
@@ -34,26 +35,13 @@
             </mat-error>
           </mat-form-field>
         </form>
-      </div>
-
-      <div fxLayout="column" fxFlex="30%" fxLayoutAlign="center center" fxLayoutGap="10px">
         <button id="trackBtn" mat-raised-button color="primary" (click)="addSymbol()" [disabled]="!stockForm.valid">Track Stock</button>
-      </div>
     </div>
-
   </mat-card>
 
-
+  <!-- Companies stock -->
   <div fxFill fxLayout="row wrap">
-    <div
-      *ngFor="let company of companyStockCombined"
-      fxFlex="25"
-      fxFlex.md="33"
-      fxFlex.sm="50"
-      fxFlex.xs="100"
-      fxLayout="column"
-      class="company-container"
-    >
+    <div *ngFor="let company of companyStockCombined" fxFlex="25" fxFlex.md="33" fxFlex.sm="50" fxFlex.xs="100" fxLayout="column" class="company-stock-container">
       <app-company-stock [company]="company" (removeEvent)="removeSymbol($event)"></app-company-stock>
     </div>
   </div>

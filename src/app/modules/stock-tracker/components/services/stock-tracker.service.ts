@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
-import { quote } from '../../models/quote';
-import { company } from '../../models/company';
+import { quote as Quote } from '../../models/quote';
+import { company as Company } from '../../models/company';
+import { Sentiment } from '../../models/sentiment';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class StockTrackerService {
 
   constructor(private http: HttpClient) { }
 
-  getQuote(symbol: string): Observable<quote> {
+  getQuote(symbol: string): Observable<Quote> {
     return this.http.get(`${this.API_BASE_URL}/quote`, {
       params: {
         token: this.API_KEY,
@@ -25,15 +26,45 @@ export class StockTrackerService {
     );
   }
 
-  getCompanyName(symbol: string): Observable<company> {
+  getCompanyName(symbol: string): Observable<Company> {
     return this.http.get(`${this.API_BASE_URL}/search`, {
       params: {
         token: this.API_KEY,
         q: symbol
       }
     }).pipe(
-      map((data: any) => data.result[0]),
+      map((response: any) => response.result[0]),
       tap(console.log)
     );
   }
+
+  getSentiment(symbol: string): Observable<Sentiment[]> {
+    const currentDate = new Date();
+    const currentMonth = currentDate.getMonth() + 1;
+    const currentYear = currentDate.getFullYear();
+
+    // Calculate the month and year for 3 months ago
+    let fromMonth = currentMonth - 3;
+    let fromYear = currentYear;
+    if (fromMonth < 0) {
+      fromMonth += 12;
+      fromYear -= 1;
+    }
+
+    // Format the dates as strings in the YYYY-MM-DD format, with a leading zero for the month
+    const from = `${fromYear}-${fromMonth.toString().padStart(2, '0')}-01`;
+    const to = `${currentYear}-${currentMonth.toString().padStart(2, '0')}-01`;
+
+    return this.http.get(`${this.API_BASE_URL}/stock/insider-sentiment`, {
+      params: {
+        token: this.API_KEY,
+        symbol,
+        from,
+        to
+      }
+    }).pipe(
+      map((response: any) => response.data)
+    );
+  }
+
 }
