@@ -1,24 +1,26 @@
-<div class="sentiment-container" fxLayout="column">
+<div fxLayout="column">
 
-  <mat-card fxLayout="row">
-    <mat-card-header>
+  <!-- Card -->
+  <mat-card fxLayout="column" class="company-sentient-card">
+
+    <!-- Card title -->
+    <div fxLayout="row" fxFlexFill fxLayoutAlign="center center">
       <mat-card-title>Sentiment</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <div class="sentiment-grid" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
-        <div class="sentiment-item" *ngFor="let item of sentiment" fxFlex="0 1 auto">
-          <p>{{ (item.month.toString().padStart(2, '0') + '-' + item.year.toString()) }}</p>
-          <p>Change: {{ item.change }}</p>
-          <p>Mspr: {{ item.mspr }}</p>
-          <p *ngIf="item.change > 0">
-            <mat-icon>arrow_upward</mat-icon>
-          </p>
-          <p *ngIf="item.change < 0">
-            <mat-icon>arrow_downward</mat-icon>
-          </p>
-        </div>
+    </div>
+
+    <div fxLayout="row" fxFlexFill fxLayoutAlign="start center" fxLayoutGap="20px" class="sentiment-grid">
+      <div class="sentiment-item" *ngFor="let item of sentiment" fxFlex="0 1 auto">
+        <p>{{ (item.month.toString().padStart(2, '0') + '-' + item.year.toString()) }}</p>
+        <p>Change: {{ item.change }}</p>
+        <p>Mspr: {{ item.mspr }}</p>
+        <p *ngIf="item.change > 0">
+          <mat-icon>arrow_upward</mat-icon>
+        </p>
+        <p *ngIf="item.change < 0">
+          <mat-icon>arrow_downward</mat-icon>
+        </p>
       </div>
-    </mat-card-content>
+    </div>
   </mat-card>
 
   <div fxLayout="row" fxLayoutAlign="start center" fxFlex="100%">

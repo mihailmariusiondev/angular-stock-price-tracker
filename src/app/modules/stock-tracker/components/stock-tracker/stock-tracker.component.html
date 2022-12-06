@@ -1,41 +1,41 @@
 <div fxLayout="column">
 
-  <!-- Stock tracker -->
-  <mat-card class="stock-tracker-container" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="20px">
+  <!-- Card -->
+  <mat-card fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="20px" class="stock-tracker-card">
 
-    <!-- Stock tracker title -->
+    <!-- Card title -->
     <div fxLayout="row" fxFlexFill fxLayoutAlign="center center">
       <mat-card-title> {{'Stock Tracker' | uppercase}} </mat-card-title>
     </div>
 
-    <!-- Stock tracker subtitle -->
+    <!-- Card subtitle -->
     <div fxLayout="row" fxFlexFill fxLayoutAlign="center center">
       <mat-card-subtitle>Enter the symbol of a stock to trag (i.e. AAPL., TSLA., GOOGL)</mat-card-subtitle>
     </div>
 
-    <!-- Stock tracker form -->
+    <!-- Card content -->
     <div fxLayout="row" fxFlexFill fxLayoutGap="50px" fxLayoutAlign="center center" class="form-container">
-        <form [formGroup]="stockForm">
-          <mat-form-field>
-            <input id="stockInput" matInput placeholder="Enter stock symbol" formControlName="symbol" />
-            <mat-error *ngIf="stockForm.get('symbol')?.hasError('required')">
-              Stock symbol is required
-            </mat-error>
-            <mat-error *ngIf="stockForm.get('symbol')?.hasError('minlength')">
-              Stock symbol must be at least 1 character long
-            </mat-error>
-            <mat-error *ngIf="stockForm.get('symbol')?.hasError('maxlength')">
-              Stock symbol must be at most 5 characters long
-            </mat-error>
-            <mat-error *ngIf="stockForm.get('symbol')?.hasError('duplicate')">
-              Stock symbol is already tracked
-            </mat-error>
-            <mat-error *ngIf="stockForm.get('symbol')?.hasError('whitespace')">
-              Stock symbol cannot contain leading or trailing whitespace
-            </mat-error>
-          </mat-form-field>
-        </form>
-        <button id="trackBtn" mat-raised-button color="primary" (click)="addSymbol()" [disabled]="!stockForm.valid">Track Stock</button>
+      <form [formGroup]="stockForm">
+        <mat-form-field>
+          <input id="stockInput" matInput placeholder="Enter stock symbol" formControlName="symbol" />
+          <mat-error *ngIf="stockForm.get('symbol')?.hasError('required')">
+            Stock symbol is required
+          </mat-error>
+          <mat-error *ngIf="stockForm.get('symbol')?.hasError('minlength')">
+            Stock symbol must be at least 1 character long
+          </mat-error>
+          <mat-error *ngIf="stockForm.get('symbol')?.hasError('maxlength')">
+            Stock symbol must be at most 5 characters long
+          </mat-error>
+          <mat-error *ngIf="stockForm.get('symbol')?.hasError('duplicate')">
+            Stock symbol is already tracked
+          </mat-error>
+          <mat-error *ngIf="stockForm.get('symbol')?.hasError('whitespace')">
+            Stock symbol cannot contain leading or trailing whitespace
+          </mat-error>
+        </mat-form-field>
+      </form>
+      <button id="trackBtn" mat-raised-button color="primary" (click)="addSymbol()" [disabled]="!stockForm.valid">Track Stock</button>
     </div>
   </mat-card>
 
