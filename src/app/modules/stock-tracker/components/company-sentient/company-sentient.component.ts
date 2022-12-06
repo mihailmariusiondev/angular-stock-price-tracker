@@ -8,10 +8,11 @@ import { StockTrackerService } from '../services/stock-tracker.service';
   templateUrl: './company-sentient.component.html',
   styleUrls: ['./company-sentient.component.scss']
 })
-export class CompanySentientComponent implements OnInit{
+export class CompanySentientComponent implements OnInit {
 
   sentiment: Sentiment[] = [];
   symbol: string = '';
+  companyName: string = '';
 
   constructor(
     private route: ActivatedRoute,
@@ -20,8 +21,11 @@ export class CompanySentientComponent implements OnInit{
   ) { }
 
   ngOnInit() {
+    this.route.queryParams.subscribe(params => {
+      this.companyName = params['companyName'];
+    });
     this.symbol = this.route.snapshot.paramMap.get('symbol') || '';
-    if(this.symbol){
+    if (this.symbol) {
       this.stockTrackerService.getSentiment(this.symbol)
         .subscribe(sentiment => {
           this.sentiment = sentiment;

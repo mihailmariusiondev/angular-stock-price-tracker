@@ -5,20 +5,38 @@
 
     <!-- Card title -->
     <div fxLayout="row" fxFlexFill fxLayoutAlign="center center">
-      <mat-card-title>Sentiment</mat-card-title>
+      <mat-card-title> {{companyName}} </mat-card-title>
     </div>
 
-    <div fxLayout="row" fxFlexFill fxLayoutAlign="start center" fxLayoutGap="20px" class="sentiment-grid">
-      <div class="sentiment-item" *ngFor="let item of sentiment" fxFlex="0 1 auto">
-        <p>{{ (item.month.toString().padStart(2, '0') + '-' + item.year.toString()) }}</p>
-        <p>Change: {{ item.change }}</p>
-        <p>Mspr: {{ item.mspr }}</p>
-        <p *ngIf="item.change > 0">
-          <mat-icon>arrow_upward</mat-icon>
-        </p>
-        <p *ngIf="item.change < 0">
-          <mat-icon>arrow_downward</mat-icon>
-        </p>
+    <!-- Card content -->
+    <div fxLayout="row" fxFlexFill fxLayoutAlign="center center"  class="sentiment-grid">
+      <div fxLayout="column" [fxFlex]="isLast ? '100%' : '33%'" fxLayoutAlign="center center" class="sentiment-item" *ngFor="let item of sentiment; last as isLast">
+
+        <div fxLayout="row" fxLayoutAlign="center center" >
+          <div fxLayout="column" fxLayoutAlign="center center" fxFlex="80%">
+
+            <div fxLayout="row" fxFlexFil>
+              <p>{{ (item.month.toString().padStart(2, '0') + '-' + item.year.toString()) }}</p>
+            </div>
+            <div fxLayout="row" fxFlexFil>
+              <p>Change: {{ item.change }}</p>
+            </div>
+            <div fxLayout="row" fxFlexFil>
+              <p>Mspr: {{ item.mspr }}</p>
+            </div>
+          </div>
+
+          <div fxLayout="column" fxLayoutAlign="center center" fxFlex="20%">
+
+            <p *ngIf="item.change > 0">
+              <mat-icon>arrow_upward</mat-icon>
+            </p>
+            <p *ngIf="item.change < 0">
+              <mat-icon>arrow_downward</mat-icon>
+            </p>
+          </div>
+        </div>
+
       </div>
     </div>
   </mat-card>
@@ -28,6 +46,3 @@
     <button mat-button (click)="goBack()">Back</button>
   </div>
 </div>
-
-
-

@@ -10,14 +10,17 @@
 
     <!-- Card subtitle -->
     <div fxLayout="row" fxFlexFill fxLayoutAlign="center center">
-      <mat-card-subtitle>Enter the symbol of a stock to trag (i.e. AAPL., TSLA., GOOGL)</mat-card-subtitle>
+      <mat-card-subtitle>
+        Enter the symbol of a stock to trag (i.e. AAPL., TSLA., GOOGL). <strong>Note</strong> the query will return the first result that matches the symbol of a stock
+      </mat-card-subtitle>
     </div>
 
     <!-- Card content -->
     <div fxLayout="row" fxFlexFill fxLayoutGap="50px" fxLayoutAlign="center center" class="form-container">
       <form [formGroup]="stockForm">
         <mat-form-field>
-          <input id="stockInput" matInput placeholder="Enter stock symbol" formControlName="symbol" />
+          <!-- TODO prevent multiple key presses in a row -->
+          <input id="stockInput" matInput placeholder="Enter stock symbol" formControlName="symbol" (keyup.enter)="addSymbol()"/>
           <mat-error *ngIf="stockForm.get('symbol')?.hasError('required')">
             Stock symbol is required
           </mat-error>
