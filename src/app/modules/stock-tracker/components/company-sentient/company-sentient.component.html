@@ -5,7 +5,7 @@
 
     <!-- Card title -->
     <div fxLayout="row" fxFlexFill fxLayoutAlign="center center">
-      <h1> {{companyName}} </h1>
+      <h1> <strong>({{symbol}}) {{companyName}}</strong> </h1>
     </div>
 
     <!-- Card content -->
@@ -13,15 +13,15 @@
       <mat-card fxLayout="column" [fxFlex]="sentiments.length == 1 ? '100%' : sentiments.length == 2 ? '50%' : '33%'" class="sentiment-item" *ngFor="let sentiment of sentiments">
         <div fxLayout="row">
 
-          <div fxLayout="column" fxFlex="65%" fxLayoutGap="20px" style="padding: 20px;">
+          <div fxLayout="column" fxFlex="65%" fxLayoutGap="25px" style="padding: 20px;">
             <div fxLayout="row" fxFlexFil>
-              <span style="font-size: 20px;"><b>{{ (sentiment.month.toString().padStart(2, '0') + '-' + sentiment.year.toString()) }}</b></span>
+              <span style="font-size: 20px;"><b>{{ (monthNames[sentiment.month - 1] + ' ' + sentiment.year.toString()) }}</b></span>
             </div>
             <div fxLayout="row" fxFlexFil>
-              <span>Change: {{ sentiment.change }}</span>
+              <span style="font-size: 14px;"><b>Change</b>: {{ sentiment.change }}</span>
             </div>
             <div fxLayout="row" fxFlexFil>
-              <span>Mspr: {{ sentiment.mspr }}</span>
+              <span style="font-size: 14px;"><b>Mspr</b>: {{ sentiment.mspr }}</span>
             </div>
           </div>
 
@@ -35,7 +35,7 @@
       </mat-card>
     </div>
 
-    <div fxLayout="row" fxLayoutAlign="start center" fxFlex="100%">
+    <div fxLayout="row" fxLayoutAlign="start center" fxFlex="100%" style="margin-top: 20px;">
       <mat-icon>chevron_left</mat-icon>
       <button mat-button (click)="goBack()">Back</button>
     </div>

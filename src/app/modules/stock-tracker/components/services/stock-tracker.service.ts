@@ -42,6 +42,7 @@ export class StockTrackerService {
     const currentDate = new Date();
     const currentMonth = currentDate.getMonth() + 1;
     const currentYear = currentDate.getFullYear();
+    const currentDay = currentDate.getDate();
 
     // Calculate the month and year for 3 months ago
     let fromMonth = currentMonth - 3;
@@ -51,9 +52,9 @@ export class StockTrackerService {
       fromYear -= 1;
     }
 
-    // Format the dates as strings in the YYYY-MM-DD format, with a leading zero for the month
+    // Format the dates as strings in the YYYY-MM-DD format, with a leading zero for the month and day
     const from = `${fromYear}-${fromMonth.toString().padStart(2, '0')}-01`;
-    const to = `${currentYear}-${currentMonth.toString().padStart(2, '0')}-01`;
+    const to = `${currentYear}-${currentMonth.toString().padStart(2, '0')}-${currentDay.toString().padStart(2, '0')}`;
 
     return this.http.get(`${this.API_BASE_URL}/stock/insider-sentiment`, {
       params: {
@@ -66,5 +67,6 @@ export class StockTrackerService {
       map((response: any) => response.data)
     );
   }
+
 
 }

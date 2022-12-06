@@ -13,6 +13,8 @@ export class CompanySentientComponent implements OnInit {
   sentiments: Sentiment[] = [];
   symbol: string = '';
   companyName: string = '';
+  monthNames: string[] = [  'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',  'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
 
   constructor(
     private route: ActivatedRoute,
