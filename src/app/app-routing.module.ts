@@ -2,16 +2,15 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  // Routes
+  // Routes (lazy loaded)
   { path: 'stock-tracker', loadChildren: () => import('./modules/stock-tracker/stock-tracker.module').then(m => m.StockTrackerModule) },
-  { path: '', redirectTo: 'stock-tracker', pathMatch: 'full' },
 
   // Fallback when no prior route is matched
   { path: '**', redirectTo: 'stock-tracker', pathMatch: 'full' }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { enableTracing: false })],
+  imports: [RouterModule.forRoot(routes, { enableTracing: true })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

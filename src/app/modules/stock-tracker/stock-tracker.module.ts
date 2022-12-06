@@ -4,12 +4,14 @@ import { StockTrackerComponent } from './components/stock-tracker/stock-tracker.
 
 import { StockTrackerRoutingModule } from './stock-tracker-routing.module';
 import { CompanyStockComponent } from './components/company-stock/company-stock.component';
+import { CompanySentientComponent } from './components/company-sentient/company-sentient.component';
 
 
 @NgModule({
   declarations: [
     StockTrackerComponent,
-    CompanyStockComponent
+    CompanyStockComponent,
+    CompanySentientComponent
   ],
   imports: [
     SharedModule,

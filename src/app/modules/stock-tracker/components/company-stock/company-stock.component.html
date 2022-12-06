@@ -48,9 +48,11 @@
   <!-- Card actions -->
   <mat-card-actions>
     <div fxLayout="row" fxLayoutAlign="end center" fxFlex="100%">
-      <button mat-button id="{{'sentiment' + (company?.symbol | uppercase)}}">See sentiment details</button>
+      <button mat-button id="{{'sentiment' + (company?.symbol | uppercase)}}" [routerLink]="['/stock-tracker/sentiment', company?.symbol]">See sentiment details</button>
       <mat-icon>chevron_right</mat-icon>
     </div>
   </mat-card-actions>
 
 </mat-card>
+
+

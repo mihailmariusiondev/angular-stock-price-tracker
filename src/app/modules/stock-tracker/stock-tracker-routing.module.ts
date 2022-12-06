@@ -1,16 +1,19 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { CompanySentientComponent } from './components/company-sentient/company-sentient.component';
 import { StockTrackerComponent } from './components/stock-tracker/stock-tracker.component';
 
 const routes: Routes = [
   {
     path: '',
     component: StockTrackerComponent,
-    children: [
-      { path: 'stock-tracker', component: StockTrackerComponent }
-    ],
   },
+  {
+    path: 'sentiment/:symbol',
+    component: CompanySentientComponent,
+  }
 ];
+
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

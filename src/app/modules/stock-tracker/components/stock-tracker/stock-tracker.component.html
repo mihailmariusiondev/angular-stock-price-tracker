@@ -54,9 +54,10 @@
       fxLayout="column"
       class="company-container"
     >
-    <app-company-stock [company]="company" (removeEvent)="removeSymbol($event)"></app-company-stock>
+      <app-company-stock [company]="company" (removeEvent)="removeSymbol($event)"></app-company-stock>
     </div>
   </div>
 
-
 </div>
+
+<router-outlet></router-outlet>
