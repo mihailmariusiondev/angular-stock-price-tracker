@@ -29,7 +29,7 @@
     </div>
 
     <div fxFlex="20%" fxLayout="column" fxLayoutAlign="center center">
-      <div [ngSwitch]="company.d > 0">
+      <div *ngIf="company.d" [ngSwitch]="company.d > 0">
         <mat-icon *ngSwitchCase="true" color="primary" class="icon-trending">trending_up</mat-icon>
         <mat-icon *ngSwitchCase="false" color="warn" class="icon-trending">trending_down</mat-icon>
       </div>
