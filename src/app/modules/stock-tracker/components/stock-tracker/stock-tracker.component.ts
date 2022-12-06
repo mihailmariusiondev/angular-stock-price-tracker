@@ -1,11 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
-import { BehaviorSubject, combineLatest, Observable, take, tap } from 'rxjs';
-import { company } from '../../models/company';
-import { quote } from '../../models/quote';
+import { combineLatest, take, tap } from 'rxjs';
+import { companyAndQuote } from '../../models/companyandquote';
 import { StockTrackerService } from '../services/stock-tracker.service';
-
-type companyAndQuote = company & quote;
 
 @Component({
   selector: 'app-stock-tracker',

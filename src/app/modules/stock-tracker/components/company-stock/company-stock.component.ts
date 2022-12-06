@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { companyAndQuote } from '../../models/companyandquote';
 
 @Component({
   selector: 'app-company-stock',
@@ -6,12 +7,14 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   styleUrls: ['./company-stock.component.scss']
 })
 export class CompanyStockComponent {
-  private _company: any;
+  private _company!: companyAndQuote;
 
-  @Input() set company(value: any) {
-    this._company = value;
+  @Input() set company(value: companyAndQuote) {
+    if (value) {
+      this._company = value;
+    }
   }
-  get company(): any { return this._company; }
+  get company(): companyAndQuote { return this._company; }
 
   @Output() removeEvent = new EventEmitter<string>();
 
