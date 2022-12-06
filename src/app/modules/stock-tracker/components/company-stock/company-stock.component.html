@@ -1,39 +1,37 @@
 <mat-card>
   <!-- TODO remove styles from template -->
   <!-- Card header -->
-  <mat-card-header>
-    <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="10px">
-      <div fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="5px">
-        <mat-card-title> ({{company?.symbol}}) {{company.description}}</mat-card-title>
-      </div>
-      <div fxLayout="column" fxLayoutAlign="end center" fxLayoutGap="5px">
-        <button id="{{'remove' + (company?.symbol | uppercase)}}" mat-button (click)="removeSymbol(company.symbol)">
-          <mat-icon>close</mat-icon>
-        </button>
-      </div>
+  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="30px">
+    <!-- Element 1 -->
+    <div fxLayout="column" fxLayoutGap="10px" fxFlex="80%">
+      <mat-card-title class="company-stock-title" > ({{company?.symbol}}) {{company.description}}</mat-card-title>
     </div>
-  </mat-card-header>
+    <!-- Element 2 -->
+    <div fxLayout="column" fxLayoutGap="10px">
+      <button id="{{'remove' + (company?.symbol | uppercase)}}" mat-button (click)="removeSymbol(company.symbol)">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+  </div>
+
 
   <!-- Card content -->
-  <mat-card-content>
-    <div fxLayout="row" fxLayoutAlign="space-around center" fxLayoutGap="10px">
-
-      <div fxFlex="80%" fxLayout="column" fxLayoutGap="20px">
-        <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px">
-          <span fxFlex="50%"><b>Change today:</b> <br>{{company.d | number:'1.0-2'}}% </span>
-          <span fxFlex="50%"><b>Opening price:</b> <br>{{company.o | currency}} </span>
-        </div>
-        <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px">
-          <span fxFlex="50%"><b>Current price:</b> <br>{{company.c | currency}} </span>
-          <span fxFlex="50%"><b>High price:</b> <br>{{company.h | currency}} </span>
-        </div>
+  <mat-card-content fxLayout="row" fxLayoutAlign="space-around center" fxLayoutGap="10px" style="margin-top: 20px;">
+    <div fxFlex="80%" fxLayout="column" fxLayoutGap="20px">
+      <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px">
+        <span fxFlex="50%"><b>Change today:</b> <br>{{company.d | number:'1.0-2'}}% </span>
+        <span fxFlex="50%"><b>Opening price:</b> <br>{{company.o | currency}} </span>
       </div>
+      <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px">
+        <span fxFlex="50%"><b>Current price:</b> <br>{{company.c | currency}} </span>
+        <span fxFlex="50%"><b>High price:</b> <br>{{company.h | currency}} </span>
+      </div>
+    </div>
 
-      <div fxFlex="20%" fxLayout="column" fxLayoutAlign="center center">
-        <div [ngSwitch]="company.d > 0">
-          <mat-icon *ngSwitchCase="true" color="primary" class="icon-trending">trending_up</mat-icon>
-          <mat-icon *ngSwitchCase="false" color="warn" class="icon-trending">trending_down</mat-icon>
-        </div>
+    <div fxFlex="20%" fxLayout="column" fxLayoutAlign="center center">
+      <div [ngSwitch]="company.d > 0">
+        <mat-icon *ngSwitchCase="true" color="primary" class="icon-trending">trending_up</mat-icon>
+        <mat-icon *ngSwitchCase="false" color="warn" class="icon-trending">trending_down</mat-icon>
       </div>
     </div>
   </mat-card-content>
