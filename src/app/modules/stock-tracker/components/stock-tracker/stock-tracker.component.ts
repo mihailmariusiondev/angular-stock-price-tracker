@@ -36,7 +36,6 @@ export class StockTrackerComponent implements OnInit {
 
   addSymbol() {
     const stockSymbol = this.stockForm.value.symbol?.toUpperCase();
-    console.log(stockSymbol);
     if (!stockSymbol) return;
 
     let company$ = this.stockTrackerService.getCompanyName(stockSymbol).pipe(take(1));

@@ -22,7 +22,7 @@ export class StockTrackerService {
         symbol
       }
     }).pipe(
-      tap(console.log)
+      map((response: any) => response as Quote),
     );
   }
 
@@ -33,10 +33,10 @@ export class StockTrackerService {
         q: symbol
       }
     }).pipe(
-      map((response: any) => response.result[0]),
-      tap(console.log)
+      map((response: any) => response.result[0] as Company),
     );
   }
+
 
   getSentiment(symbol: string): Observable<Sentiment[]> {
     const currentDate = new Date();
@@ -64,7 +64,7 @@ export class StockTrackerService {
         to
       }
     }).pipe(
-      map((response: any) => response.data)
+      map((response: any) => response.data as Sentiment[])
     );
   }
 
