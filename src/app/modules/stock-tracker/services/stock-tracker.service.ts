@@ -16,7 +16,7 @@ export class StockTrackerService {
   constructor(private http: HttpClient) { }
 
   getQuote(symbol: string): Observable<Quote> {
-    return this.http.get(`${this.API_BASE_URL}/quote`, {
+    return this.http.get<Quote>(`${this.API_BASE_URL}/quote`, {
       params: {
         token: this.API_KEY,
         symbol
