@@ -10,11 +10,11 @@ import { StockTrackerService } from '../../services/stock-tracker.service';
   styleUrls: ['./company-sentiment.component.scss']
 })
 export class CompanySentimentComponent implements OnInit, OnDestroy {
-  destroy$: Subject<boolean> = new Subject<boolean>();
 
+  destroy$: Subject<boolean> = new Subject<boolean>();
   sentiments: Sentiment[] = [];
-  symbol: string = '';
-  companyName: string = '';
+  symbol = '';
+  companyName = '';
   monthNames: string[] = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
   constructor(

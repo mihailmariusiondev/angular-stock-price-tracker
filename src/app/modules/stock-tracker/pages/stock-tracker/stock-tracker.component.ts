@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { combineLatest, Subject, take, takeUntil, tap } from 'rxjs';
 import { NoWhiteSpaceValidator } from 'src/app/modules/@shared/validators/no-whitespace.validator';
 import { companyAndQuote } from '../../models/companyandquote';
@@ -28,7 +28,7 @@ export class StockTrackerComponent implements OnInit, OnDestroy {
   }
 
   getSymbols() {
-    let localStorageSymbols = localStorage.getItem(this.localStorageKey);
+    const localStorageSymbols = localStorage.getItem(this.localStorageKey);
     if (localStorageSymbols) {
       this.companyStockCombined = JSON.parse(localStorageSymbols) as companyAndQuote[];
     }
@@ -38,8 +38,8 @@ export class StockTrackerComponent implements OnInit, OnDestroy {
     const stockSymbol = this.stockForm.value.symbol?.toUpperCase();
     if (!stockSymbol) return;
 
-    let company$ = this.stockTrackerService.getCompanyName(stockSymbol).pipe(take(1));
-    let quote$ = this.stockTrackerService.getQuote(stockSymbol).pipe(take(1));
+    const company$ = this.stockTrackerService.getCompanyName(stockSymbol).pipe(take(1));
+    const quote$ = this.stockTrackerService.getQuote(stockSymbol).pipe(take(1));
 
     // Merge both observables into one single object and store the data in localStorage
     combineLatest([company$, quote$])
@@ -65,8 +65,8 @@ export class StockTrackerComponent implements OnInit, OnDestroy {
 
   duplicateSymbolValidator(control: FormControl) {
     if (!control.value) return null;
-    let localStorageSymbols = localStorage.getItem('companiesAndQuotes');
-    let symbols: companyAndQuote[] = localStorageSymbols ? JSON.parse(localStorageSymbols) : [];
+    const localStorageSymbols = localStorage.getItem('companiesAndQuotes');
+    const symbols: companyAndQuote[] = localStorageSymbols ? JSON.parse(localStorageSymbols) : [];
 
     if (symbols.find(s => s.symbol === control.value.toUpperCase())) {
       return { duplicate: true };

@@ -11,8 +11,6 @@ export class LoaderService {
   // Create an observable stream of the loading state
   loading$ = this.loadingSubject.asObservable();
 
-  constructor() { }
-
   // Function to set the loading state
   setLoading(loading: boolean) {
     // Use the next method of the Subject to update the loading state

@@ -6,7 +6,7 @@ const routes: Routes = [
   { path: '', loadChildren: () => import('./modules/stock-tracker/stock-tracker.module').then(m => m.StockTrackerModule) },
 
   // Fallback when no prior route is matched
-  { path: '**', redirectTo: 'stock-tracker', pathMatch: 'full' }
+  { path: '**', redirectTo: '', pathMatch: 'full' }
 ];
 
 @NgModule({

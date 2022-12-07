@@ -19,7 +19,6 @@
     <div fxLayout="row" fxFlexFill fxLayoutGap="50px" fxLayoutAlign="center center" class="form-container">
       <form [formGroup]="stockForm">
         <mat-form-field>
-          <!-- TODO prevent multiple key presses in a row -->
           <input id="stockInput" matInput placeholder="Enter stock symbol" formControlName="symbol"/>
           <mat-error *ngIf="stockForm.get('symbol')?.hasError('required')">
             Stock symbol is required
