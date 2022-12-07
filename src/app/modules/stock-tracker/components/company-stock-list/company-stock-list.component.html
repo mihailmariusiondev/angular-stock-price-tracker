@@ -16,7 +16,7 @@
 
 
   <!-- Card content -->
-  <mat-card-content fxLayout="row" fxLayoutAlign="space-around center" fxLayoutGap="10px" style="margin-top: 20px;">
+  <mat-card-content fxLayout="row" fxLayoutAlign="space-around center" fxLayoutGap="10px" class="company-stock-list-card">
     <div fxFlex="80%" fxLayout="column" fxLayoutGap="20px">
       <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px">
         <span fxFlex="50%"><b>Change today:</b> <br> {{company.d ? (company.d | number:'1.0-2') + '%' : 'No data'}} </span>
