@@ -19,20 +19,29 @@
   <mat-card-content fxLayout="row" fxLayoutAlign="space-around center" fxLayoutGap="10px" style="margin-top: 20px;">
     <div fxFlex="80%" fxLayout="column" fxLayoutGap="20px">
       <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px">
-        <span fxFlex="50%"><b>Change today:</b> <br>{{company.d | number:'1.0-2'}}% </span>
-        <span fxFlex="50%"><b>Opening price:</b> <br>{{company.o | currency}} </span>
+        <span fxFlex="50%"><b>Change today:</b> <br> {{company.d ? (company.d | number:'1.0-2') + '%' : 'No data'}} </span>
+        <span fxFlex="50%"><b>Opening price:</b> <br> {{company.o ? (company.o | currency) : 'No data'}} </span>
       </div>
       <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px">
-        <span fxFlex="50%"><b>Current price:</b> <br>{{company.c | currency}} </span>
-        <span fxFlex="50%"><b>High price:</b> <br>{{company.h | currency}} </span>
+        <span fxFlex="50%"><b>Current price:</b> <br> {{company.c ? (company.c | currency) : 'No data'}} </span>
+        <span fxFlex="50%"><b>High price:</b> <br> {{company.h ? (company.h | currency) : 'No data'}} </span>
       </div>
     </div>
 
     <div fxFlex="20%" fxLayout="column" fxLayoutAlign="center center">
-      <div *ngIf="company.d" [ngSwitch]="company.d > 0">
-        <mat-icon *ngSwitchCase="true" color="primary" class="icon-trending">trending_up</mat-icon>
-        <mat-icon *ngSwitchCase="false" color="warn" class="icon-trending">trending_down</mat-icon>
-      </div>
+      <ng-container *ngIf="company.d; else noCompanyData">
+        <div [ngSwitch]="company.d > 0">
+          <mat-icon *ngSwitchCase="true" color="primary" class="icon-trending">trending_up</mat-icon>
+          <mat-icon *ngSwitchCase="false" color="warn" class="icon-trending">trending_down</mat-icon>
+        </div>
+      </ng-container>
+      <ng-template #noCompanyData>
+        <div>
+          <mat-icon class="icon-trending icon-trending-no-data">error_outline</mat-icon>
+        </div>
+      </ng-template>
+
+
     </div>
   </mat-card-content>
 

@@ -13,7 +13,7 @@ export class CompanySentientComponent implements OnInit {
   sentiments: Sentiment[] = [];
   symbol: string = '';
   companyName: string = '';
-  monthNames: string[] = [  'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',  'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  monthNames: string[] = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
 
   constructor(
@@ -23,10 +23,19 @@ export class CompanySentientComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.symbol = this.route.snapshot.paramMap.get('symbol') || '';
+
     this.route.queryParams.subscribe(params => {
       this.companyName = params['companyName'];
     });
-    this.symbol = this.route.snapshot.paramMap.get('symbol') || '';
+
+    if (this.symbol && !this.companyName) {
+      this.stockTrackerService.getCompanyName(this.symbol)
+        .subscribe(company => {
+          this.companyName = company.description;
+        });
+    }
+
     if (this.symbol) {
       this.stockTrackerService.getSentiment(this.symbol)
         .subscribe(sentiment => {
@@ -34,6 +43,7 @@ export class CompanySentientComponent implements OnInit {
         });
     }
   }
+
 
   goBack() {
     this.router.navigate(['..']);
