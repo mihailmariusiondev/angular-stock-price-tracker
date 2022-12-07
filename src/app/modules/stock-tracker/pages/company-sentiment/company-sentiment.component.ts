@@ -39,7 +39,7 @@ export class CompanySentimentComponent implements OnInit, OnDestroy {
     }
 
     if (this.symbol) {
-      this.stockTrackerService.getSentiment(this.symbol).pipe(takeUntil(this.destroy$))
+      this.stockTrackerService.getInsiderSentiment(this.symbol).pipe(takeUntil(this.destroy$))
         .subscribe(sentiment => {
           this.sentiments = sentiment;
         });

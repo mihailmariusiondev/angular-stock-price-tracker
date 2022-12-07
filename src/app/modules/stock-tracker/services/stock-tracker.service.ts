@@ -34,7 +34,7 @@ export class StockTrackerService {
   }
 
 
-  getSentiment(symbol: string): Observable<Sentiment[]> {
+  getInsiderSentiment(symbol: string): Observable<Sentiment[]> {
     const currentDate = new Date();
     const currentMonth = currentDate.getMonth() + 1;
     const currentYear = currentDate.getFullYear();
