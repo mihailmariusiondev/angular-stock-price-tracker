@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { SentimentGuard } from '@core/guards/sentiment.guard';
 import { SentimentComponent } from './pages/sentiment/sentiment.component';
 import { StockTrackerComponent } from './pages/stock-tracker/stock-tracker.component';
 
@@ -11,6 +12,7 @@ const routes: Routes = [
   {
     path: 'sentiment/:symbol',
     component: SentimentComponent,
+    canActivate: [SentimentGuard],
   }
 ];
 
