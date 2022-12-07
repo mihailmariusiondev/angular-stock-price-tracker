@@ -1,16 +1,23 @@
 <div fxLayout="column">
 
   <!-- Card -->
-    <div fxLayout="column" fxFlex="80%" class="company-sentient-card">
+    <div fxLayout="column" fxFlex="80%" fxLayoutGap="10px">
+
+      <!-- Card title -->
+      <div fxLayout="row" fxFlexFill fxLayoutAlign="center center" class="company-sentient-title">
+        <mat-card-title> <strong>({{symbol}}) {{companyName}}</strong> </mat-card-title>
+      </div>
+
+      <div fxLayout="row" fxFlexFill fxLayoutAlign="center center">
+        <mat-card-subtitle>
+          <span><b>Note</b>: some companies may not have sentiment data or may only have data for one or two months.</span>
+        </mat-card-subtitle>
+      </div>
+
       <ng-container *ngIf="sentiments.length > 0; else noSentimentsTemplate">
 
-        <!-- Card title -->
-        <div fxLayout="row" fxFlexFill fxLayoutAlign="center center">
-          <h1> <strong>({{symbol}}) {{companyName}}</strong> </h1>
-        </div>
-
         <!-- Card content -->
-        <div fxLayout="row" fxFlexFill fxLayoutAlign="center center">
+        <div fxLayout="row" fxFlexFill fxLayoutAlign="center center" class="company-sentient-card">
           <mat-card fxLayout="column" [fxFlex]="sentiments.length == 1 ? '100%' : sentiments.length == 2 ? '50%' : '33%'" class="sentiment-item" *ngFor="let sentiment of sentiments">
             <div fxLayout="row">
 
@@ -28,8 +35,8 @@
 
               <div fxFlex="35%" fxLayout="column" fxLayoutAlign="center center">
                 <div [ngSwitch]="sentiment.change > 0">
-                  <mat-icon *ngSwitchCase="true" color="primary" class="icon-trending">trending_up</mat-icon>
-                  <mat-icon *ngSwitchCase="false" color="warn" class="icon-trending">trending_down</mat-icon>
+                  <mat-icon *ngSwitchCase="true" class="icon-trending change-positive">trending_up</mat-icon>
+                  <mat-icon *ngSwitchCase="false" class="icon-trending change-negative">trending_down</mat-icon>
                 </div>
               </div>
             </div>
@@ -38,8 +45,8 @@
 
       </ng-container>
       <ng-template #noSentimentsTemplate>
-        <mat-card fxLayout="column" class="sentiment-item" fxLayoutAlign="center center">
-            No data available for <strong>({{symbol}}) {{companyName}}</strong>
+        <mat-card fxLayout="column" class="sentiment-item company-sentient-card" fxLayoutAlign="center center">
+            No data available
         </mat-card>
 
       </ng-template>

@@ -1,13 +1,14 @@
-.positive {
+.change-positive {
   color: green;
 }
 
-.negative {
+.change-negative {
   color: red;
 }
 
 .company-sentient-card {
   margin-top: 20px;
+  margin-bottom: 20px;
   margin-left: 5px;
   margin-right: 5px;
 }
@@ -20,4 +21,8 @@
   margin-right: 10px;
   margin-left: 10px;
   min-height: 100px;
+}
+
+.company-sentient-title {
+  margin-top: 10px;
 }
