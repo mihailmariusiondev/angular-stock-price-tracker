@@ -1,4 +1,4 @@
-export interface quote {
+export interface Quote {
   c?: number;
   d?: number;
   dp?: number;

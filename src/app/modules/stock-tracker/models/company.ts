@@ -1,4 +1,4 @@
-export interface company {
+export interface Company {
   description: string;
   displaySymbol: string;
   symbol: string;

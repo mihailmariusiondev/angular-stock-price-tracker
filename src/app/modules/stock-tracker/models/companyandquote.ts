@@ -1,4 +1,4 @@
-import { company } from "./company";
-import { quote } from "./quote";
+import { Company } from "./company";
+import { Quote } from "./quote";
 
-export type companyAndQuote = company & quote;
+export type CompanyAndQuote = Company & Quote;
