@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { combineLatest, take, tap } from 'rxjs';
+import { NoWhiteSpaceValidator } from 'src/app/modules/@shared/validators/no-whitespace.validator';
 import { companyAndQuote } from '../../models/companyandquote';
 import { StockTrackerService } from '../../services/stock-tracker.service';
 
@@ -17,7 +18,7 @@ export class StockTrackerComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private stockTrackerService: StockTrackerService) {
     this.stockForm = fb.group({
-      symbol: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(5), this.duplicateSymbolValidator, this.noWhiteSpaceValidator]]
+      symbol: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(5), this.duplicateSymbolValidator, NoWhiteSpaceValidator.whiteSpace()]]
     });
   }
 
@@ -70,11 +71,6 @@ export class StockTrackerComponent implements OnInit {
       return { duplicate: true };
     }
     return null;
-  }
-
-  public noWhiteSpaceValidator(control: FormControl) {
-    const isSpace = (control.value || '').match(/\s/g);
-    return isSpace ? { whitespace: true } : null;
   }
 
 }
