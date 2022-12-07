@@ -21,9 +21,7 @@ export class StockTrackerService {
         token: this.API_KEY,
         symbol
       }
-    }).pipe(
-      map((response: any) => response as Quote),
-    );
+    })
   }
 
   getCompanyName(symbol: string): Observable<Company> {

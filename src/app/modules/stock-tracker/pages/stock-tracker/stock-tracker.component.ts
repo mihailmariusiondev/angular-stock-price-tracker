@@ -45,8 +45,8 @@ export class StockTrackerComponent implements OnInit, OnDestroy {
     combineLatest([company$, quote$])
       .pipe(
         takeUntil(this.destroy$),
-        tap(([quote, company]) => {
-          const companyAndQuote: companyAndQuote = { ...quote, ...company };
+        tap(([company, quote]) => {
+          const companyAndQuote: companyAndQuote = { ...company, ...quote };
           this.companyStockCombined = [...this.companyStockCombined, companyAndQuote];
           localStorage.setItem(this.localStorageKey, JSON.stringify(this.companyStockCombined));
           this.stockForm.reset();
