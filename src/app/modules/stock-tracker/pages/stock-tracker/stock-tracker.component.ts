@@ -38,7 +38,7 @@ export class StockTrackerComponent implements OnInit, OnDestroy {
     const stockSymbol = this.stockForm.value.symbol?.toUpperCase();
     if (!stockSymbol) return;
 
-    const company$ = this.stockTrackerService.getCompanyName(stockSymbol).pipe(take(1));
+    const company$ = this.stockTrackerService.getSymbol(stockSymbol).pipe(take(1));
     const quote$ = this.stockTrackerService.getQuote(stockSymbol).pipe(take(1));
 
     // Merge both observables into one single object and store the data in localStorage

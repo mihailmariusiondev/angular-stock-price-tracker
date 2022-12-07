@@ -24,7 +24,7 @@ export class StockTrackerService {
     })
   }
 
-  getCompanyName(symbol: string): Observable<Company> {
+  getSymbol(symbol: string): Observable<Company> {
     return this.http.get(`${this.API_BASE_URL}/search`, {
       params: {
         token: this.API_KEY,
