@@ -4,11 +4,11 @@ import { Sentiment } from '../../models/sentiment';
 import { StockTrackerService } from '../../services/stock-tracker.service';
 
 @Component({
-  selector: 'app-company-sentient',
-  templateUrl: './company-sentient.component.html',
-  styleUrls: ['./company-sentient.component.scss']
+  selector: 'app-company-sentiment',
+  templateUrl: './company-sentiment.component.html',
+  styleUrls: ['./company-sentiment.component.scss']
 })
-export class CompanySentientComponent implements OnInit {
+export class CompanySentimentComponent implements OnInit {
 
   sentiments: Sentiment[] = [];
   symbol: string = '';

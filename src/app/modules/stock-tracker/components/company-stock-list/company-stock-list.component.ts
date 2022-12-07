@@ -2,11 +2,11 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { companyAndQuote } from '../../models/companyandquote';
 
 @Component({
-  selector: 'app-company-stock',
-  templateUrl: './company-stock.component.html',
-  styleUrls: ['./company-stock.component.scss']
+  selector: 'app-company-stock-list',
+  templateUrl: './company-stock-list.component.html',
+  styleUrls: ['./company-stock-list.component.scss']
 })
-export class CompanyStockComponent {
+export class CompanyStockListComponent {
   private _company!: companyAndQuote;
 
   @Input() set company(value: companyAndQuote) {

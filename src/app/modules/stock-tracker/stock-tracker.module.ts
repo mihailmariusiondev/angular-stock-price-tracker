@@ -1,17 +1,17 @@
 import { NgModule } from '@angular/core';
 import { SharedModule } from '../@shared/shared.module';
-import { StockTrackerComponent } from './components/stock-tracker/stock-tracker.component';
+import { StockTrackerComponent } from './pages/stock-tracker/stock-tracker.component';
 
 import { StockTrackerRoutingModule } from './stock-tracker-routing.module';
-import { CompanyStockComponent } from './components/company-stock/company-stock.component';
-import { CompanySentientComponent } from './components/company-sentient/company-sentient.component';
+import { CompanyStockListComponent } from './components/company-stock-list/company-stock-list.component';
+import { CompanySentimentComponent } from './components/company-sentiment/company-sentiment.component';
 
 
 @NgModule({
   declarations: [
     StockTrackerComponent,
-    CompanyStockComponent,
-    CompanySentientComponent
+    CompanyStockListComponent,
+    CompanySentimentComponent
   ],
   imports: [
     SharedModule,
