@@ -1,19 +1,15 @@
 <mat-card>
-  <!-- TODO remove styles from template -->
   <!-- Card header -->
   <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="30px">
-    <!-- Element 1 -->
     <div fxLayout="column" fxLayoutGap="10px" fxFlex="80%">
       <mat-card-title class="company-stock-title" > ({{company.symbol}}) {{company.description}}</mat-card-title>
     </div>
-    <!-- Element 2 -->
     <div fxLayout="column" fxLayoutGap="10px">
       <button id="{{'remove' + (company.symbol | uppercase)}}" mat-button (click)="removeSymbol(company.symbol)">
         <mat-icon>close</mat-icon>
       </button>
     </div>
   </div>
-
 
   <!-- Card content -->
   <mat-card-content fxLayout="row" fxLayoutAlign="space-around center" fxLayoutGap="10px" class="company-stock-list-card">
@@ -40,8 +36,6 @@
           <mat-icon class="icon-trending icon-trending-no-data">error_outline</mat-icon>
         </div>
       </ng-template>
-
-
     </div>
   </mat-card-content>
 

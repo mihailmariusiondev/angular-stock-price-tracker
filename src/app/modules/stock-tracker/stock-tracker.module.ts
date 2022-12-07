@@ -4,7 +4,7 @@ import { StockTrackerComponent } from './pages/stock-tracker/stock-tracker.compo
 
 import { StockTrackerRoutingModule } from './stock-tracker-routing.module';
 import { CompanyStockListComponent } from './components/company-stock-list/company-stock-list.component';
-import { CompanySentimentComponent } from './components/company-sentiment/company-sentiment.component';
+import { CompanySentimentComponent } from './pages/company-sentiment/company-sentiment.component';
 
 
 @NgModule({

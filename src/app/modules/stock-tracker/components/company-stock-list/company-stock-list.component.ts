@@ -16,9 +16,9 @@ export class CompanyStockListComponent {
   }
   get company(): companyAndQuote { return this._company; }
 
-  @Output() removeEvent = new EventEmitter<string>();
+  @Output() removeSymbolEvent = new EventEmitter<string>();
 
   removeSymbol(symbol: string) {
-    this.removeEvent.emit(symbol)
+    this.removeSymbolEvent.emit(symbol)
   }
 }

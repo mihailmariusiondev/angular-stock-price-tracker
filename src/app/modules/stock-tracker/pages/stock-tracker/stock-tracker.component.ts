@@ -10,7 +10,7 @@ import { StockTrackerService } from '../../services/stock-tracker.service';
   styleUrls: ['./stock-tracker.component.scss'],
 })
 export class StockTrackerComponent implements OnInit {
-
+  isLoading = false;
   stockForm: FormGroup;
   companyStockCombined: companyAndQuote[] = [];
   localStorageKey = 'companiesAndQuotes';
