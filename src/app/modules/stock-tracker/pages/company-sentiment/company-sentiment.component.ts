@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
-import { Sentiment } from '../../models/sentiment';
+import { Sentiment } from '../../models/sentiment.interface';
 import { StockTrackerService } from '../../services/stock-tracker.service';
 
 @Component({

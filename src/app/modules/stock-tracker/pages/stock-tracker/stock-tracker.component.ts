@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { combineLatest, Subject, take, takeUntil, tap } from 'rxjs';
 import { NoWhiteSpaceValidator } from 'src/app/modules/@shared/validators/no-whitespace.validator';
-import { StockSymbolAndQuote } from '../../models/companyandquote';
+import { StockSymbolAndQuote } from '../../models/stockSymbolAndQuote.interface';
 import { StockTrackerService } from '../../services/stock-tracker.service';
 
 @Component({
