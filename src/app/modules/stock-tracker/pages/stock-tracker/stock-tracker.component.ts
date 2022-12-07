@@ -35,24 +35,24 @@ export class StockTrackerComponent implements OnInit, OnDestroy {
   }
 
   addSymbol() {
-    // const stockSymbol = this.stockForm.value.symbol?.toUpperCase();
-    // if (!stockSymbol) return;
+    const stockSymbol = this.stockForm.value.symbol?.toUpperCase();
+    if (!stockSymbol) return;
 
-    // const company$ = this.stockTrackerService.getSymbol(stockSymbol).pipe(take(1));
-    // const quote$ = this.stockTrackerService.getQuote(stockSymbol).pipe(take(1));
+    const symbol$ = this.stockTrackerService.getSymbol(stockSymbol).pipe(take(1));
+    const quote$ = this.stockTrackerService.getQuote(stockSymbol).pipe(take(1));
 
-    // // Merge both observables into one single object and store the data in localStorage
-    // combineLatest([company$, quote$])
-    //   .pipe(
-    //     takeUntil(this.destroy$),
-    //     tap(([company, quote]) => {
-    //       const companyAndQuote: CompanyAndQuote = { ...company, ...quote };
-    //       this.companyStockCombined = [...this.companyStockCombined, companyAndQuote];
-    //       localStorage.setItem(this.localStorageKey, JSON.stringify(this.companyStockCombined));
-    //       this.stockForm.reset();
-    //     })
-    //   )
-    //   .subscribe();
+    // Merge both observables into one single object and store the data in localStorage
+    combineLatest([symbol$, quote$])
+      .pipe(
+        takeUntil(this.destroy$),
+        tap(([symbol, quote]) => {
+          const companyAndQuote: CompanyAndQuote = { ...symbol.result[0], ...quote };
+          this.companyStockCombined = [...this.companyStockCombined, companyAndQuote];
+          localStorage.setItem(this.localStorageKey, JSON.stringify(this.companyStockCombined));
+          this.stockForm.reset();
+        })
+      )
+      .subscribe();
   }
 
   removeSymbol(symbol: string) {
