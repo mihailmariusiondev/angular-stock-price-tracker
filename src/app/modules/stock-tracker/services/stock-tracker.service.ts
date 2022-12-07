@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators';
 import { Sentiment } from '../models/sentiment';
 import { Company } from '../models/company';
 import { Quote } from '../models/quote';
+import { SymbolResult } from '../models/symbol.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -24,15 +25,13 @@ export class StockTrackerService {
     })
   }
 
-  getSymbol(symbol: string): Observable<Company> {
-    return this.http.get(`${this.API_BASE_URL}/search`, {
+  getSymbol(symbol: string): Observable<SymbolResult> {
+    return this.http.get<SymbolResult>(`${this.API_BASE_URL}/search`, {
       params: {
         token: this.API_KEY,
         q: symbol
       }
-    }).pipe(
-      map((response: any) => response.result[0] as Company),
-    );
+    })
   }
 
 
