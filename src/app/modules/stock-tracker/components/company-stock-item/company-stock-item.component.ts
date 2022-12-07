@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { StockSymbolTwo } from '../../models/stockSymbolAndQuote.interface';
+import { StockSymbolQuote } from '../../models/stockSymbolAndQuote.interface';
 
 @Component({
   selector: 'app-company-stock-item',
@@ -7,14 +7,14 @@ import { StockSymbolTwo } from '../../models/stockSymbolAndQuote.interface';
   styleUrls: ['./company-stock-item.component.scss']
 })
 export class CompanyStockItemComponent {
-  private _company!: StockSymbolTwo;
+  private _company!: StockSymbolQuote;
 
-  @Input() set company(value: StockSymbolTwo) {
+  @Input() set company(value: StockSymbolQuote) {
     if (value) {
       this._company = value;
     }
   }
-  get company(): StockSymbolTwo { return this._company; }
+  get company(): StockSymbolQuote { return this._company; }
 
   @Output() removeSymbolEvent = new EventEmitter<string>();
 
