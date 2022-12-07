@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { quote as Quote } from '../../models/quote';
-import { company as Company } from '../../models/company';
-import { Sentiment } from '../../models/sentiment';
+import { quote as Quote } from '../models/quote';
+import { company as Company } from '../models/company';
+import { Sentiment } from '../models/sentiment';
 
 @Injectable({
   providedIn: 'root'

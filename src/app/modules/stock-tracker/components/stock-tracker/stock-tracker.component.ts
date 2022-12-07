@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { combineLatest, take, tap } from 'rxjs';
 import { companyAndQuote } from '../../models/companyandquote';
-import { StockTrackerService } from '../services/stock-tracker.service';
+import { StockTrackerService } from '../../services/stock-tracker.service';
 
 @Component({
   selector: 'app-stock-tracker',

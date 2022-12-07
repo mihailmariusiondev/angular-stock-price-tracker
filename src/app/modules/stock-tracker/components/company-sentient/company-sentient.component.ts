@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Sentiment } from '../../models/sentiment';
-import { StockTrackerService } from '../services/stock-tracker.service';
+import { StockTrackerService } from '../../services/stock-tracker.service';
 
 @Component({
   selector: 'app-company-sentient',
