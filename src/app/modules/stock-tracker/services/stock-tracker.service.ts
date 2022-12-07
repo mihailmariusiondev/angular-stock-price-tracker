@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { SentimentFake } from '../models/sentiment.interface';
 import { Quote } from '../models/quote.interface';
 import { SymbolResult } from '../models/symbol.interface';
+import { InsiderSentiment } from '../models/insiderSentiment.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -34,7 +34,7 @@ export class StockTrackerService {
   }
 
 
-  getInsiderSentiment(symbol: string): Observable<SentimentFake[]> {
+  getInsiderSentiment(symbol: string): Observable<InsiderSentiment> {
     const currentDate = new Date();
     const currentMonth = currentDate.getMonth() + 1;
     const currentYear = currentDate.getFullYear();
@@ -52,16 +52,14 @@ export class StockTrackerService {
     const from = `${fromYear}-${fromMonth.toString().padStart(2, '0')}-01`;
     const to = `${currentYear}-${currentMonth.toString().padStart(2, '0')}-${currentDay.toString().padStart(2, '0')}`;
 
-    return this.http.get(`${this.API_BASE_URL}/stock/insider-sentiment`, {
+    return this.http.get<InsiderSentiment>(`${this.API_BASE_URL}/stock/insider-sentiment`, {
       params: {
         token: this.API_KEY,
         symbol,
         from,
         to
       }
-    }).pipe(
-      map((response: any) => response.data as SentimentFake[])
-    );
+    })
   }
 
 
