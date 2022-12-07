@@ -22,7 +22,12 @@
     "lib": [
       "ES2022",
       "dom"
-    ]
+    ],
+    "paths": {
+      "@core/*": ["src/app/modules/@core/*"],
+      "@shared/*": ["src/app/modules/@shared/*"],
+      "@stock-tracker/*": ["src/app/modules/stock-tracker/*"],
+    }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

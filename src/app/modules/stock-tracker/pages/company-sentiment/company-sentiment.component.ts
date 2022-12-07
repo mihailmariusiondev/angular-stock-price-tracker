@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Sentiment } from '@stock-tracker/models/insiderSentiment.interface';
+import { StockTrackerService } from '@stock-tracker/services/stock-tracker.service';
 import { Subject, takeUntil } from 'rxjs';
-import { Sentiment } from '../../models/insiderSentiment.interface';
-import { StockTrackerService } from '../../services/stock-tracker.service';
 
 @Component({
   selector: 'app-company-sentiment',

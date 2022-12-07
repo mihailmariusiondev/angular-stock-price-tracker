@@ -1,9 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { NoWhiteSpaceValidator } from '@shared/validators/no-whitespace.validator';
+import { StockSymbolQuote } from '@stock-tracker/models/stockSymbolAndQuote.interface';
+import { StockTrackerService } from '@stock-tracker/services/stock-tracker.service';
 import { combineLatest, Subject, take, takeUntil, tap } from 'rxjs';
-import { NoWhiteSpaceValidator } from 'src/app/modules/@shared/validators/no-whitespace.validator';
-import { StockSymbolQuote } from '../../models/stockSymbolAndQuote.interface';
-import { StockTrackerService } from '../../services/stock-tracker.service';
 
 @Component({
   selector: 'app-stock-tracker',

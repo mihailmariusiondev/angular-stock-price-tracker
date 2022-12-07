@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { LoaderService } from 'src/app/modules/@core/services/loader.service';
 import { Observable } from 'rxjs';
+import { LoaderService } from 'src/app/modules/@core';
 
 @Component({
   selector: 'app-spinner',

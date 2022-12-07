@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { StockSymbolQuote } from '../../models/stockSymbolAndQuote.interface';
+import { StockSymbolQuote } from '@stock-tracker/models/stockSymbolAndQuote.interface';
 
 @Component({
   selector: 'app-company-stock-item',

@@ -1,6 +1,6 @@
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { LoadingInterceptor } from './interceptors/loading.interceptor';
+import { LoadingInterceptor } from '@core/interceptors/loading.interceptor';
 
 
 @NgModule({
