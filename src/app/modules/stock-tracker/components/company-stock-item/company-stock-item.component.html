@@ -2,10 +2,10 @@
   <!-- Card header -->
   <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="30px">
     <div fxLayout="column" fxLayoutGap="10px" fxFlex="80%">
-      <mat-card-title class="company-stock-title" > ({{company.symbol}}) {{company.description}}</mat-card-title>
+      <mat-card-title class="company-stock-title" > ({{company.stockSymbol.symbol}}) {{company.stockSymbol.description}}</mat-card-title>
     </div>
     <div fxLayout="column" fxLayoutGap="10px">
-      <button id="{{'remove' + (company.symbol | uppercase)}}" mat-button (click)="removeSymbol(company.symbol)">
+      <button id="{{'remove' + (company.stockSymbol.symbol | uppercase)}}" mat-button (click)="removeSymbol(company.stockSymbol.symbol)">
         <mat-icon>close</mat-icon>
       </button>
     </div>
@@ -15,18 +15,18 @@
   <mat-card-content fxLayout="row" fxLayoutAlign="space-around center" fxLayoutGap="10px" class="company-stock-list-card">
     <div fxFlex="80%" fxLayout="column" fxLayoutGap="20px">
       <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px">
-        <span fxFlex="50%"><b>Change today:</b> <br> {{company.d ? (company.d | number:'1.0-2') + '%' : 'No data'}} </span>
-        <span fxFlex="50%"><b>Opening price:</b> <br> {{company.o ? (company.o | currency) : 'No data'}} </span>
+        <span fxFlex="50%"><b>Change today:</b> <br> {{company.quote.d ? (company.quote.d | number:'1.0-2') + '%' : 'No data'}} </span>
+        <span fxFlex="50%"><b>Opening price:</b> <br> {{company.quote.o ? (company.quote.o | currency) : 'No data'}} </span>
       </div>
       <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px">
-        <span fxFlex="50%"><b>Current price:</b> <br> {{company.c ? (company.c | currency) : 'No data'}} </span>
-        <span fxFlex="50%"><b>High price:</b> <br> {{company.h ? (company.h | currency) : 'No data'}} </span>
+        <span fxFlex="50%"><b>Current price:</b> <br> {{company.quote.c ? (company.quote.c | currency) : 'No data'}} </span>
+        <span fxFlex="50%"><b>High price:</b> <br> {{company.quote.h ? (company.quote.h | currency) : 'No data'}} </span>
       </div>
     </div>
 
     <div fxFlex="20%" fxLayout="column" fxLayoutAlign="center center">
-      <ng-container *ngIf="company.d; else noCompanyData">
-        <div [ngSwitch]="company.d > 0">
+      <ng-container *ngIf="company.quote.d; else noCompanyData">
+        <div [ngSwitch]="company.quote.d > 0">
           <mat-icon *ngSwitchCase="true" color="primary" class="icon-trending change-positive">trending_up</mat-icon>
           <mat-icon *ngSwitchCase="false" color="warn" class="icon-trending change-negative">trending_down</mat-icon>
         </div>
@@ -42,7 +42,7 @@
   <!-- Card actions -->
   <mat-card-actions>
     <div fxLayout="row" fxLayoutAlign="end center" fxFlex="100%">
-      <button mat-button id="{{'sentiment' + (company.symbol | uppercase)}}" [routerLink]="['/sentiment', company.symbol]" [queryParams]="{ companyName: company.description}">See sentiment
+      <button mat-button id="{{'sentiment' + (company.stockSymbol.symbol | uppercase)}}" [routerLink]="['/sentiment', company.stockSymbol.symbol]" [queryParams]="{ companyName: company.stockSymbol.description}">See sentiment
         details</button>
       <mat-icon>chevron_right</mat-icon>
     </div>

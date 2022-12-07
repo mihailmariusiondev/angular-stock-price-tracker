@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { combineLatest, Subject, take, takeUntil, tap } from 'rxjs';
 import { NoWhiteSpaceValidator } from 'src/app/modules/@shared/validators/no-whitespace.validator';
-import { StockSymbolAndQuote } from '../../models/stockSymbolAndQuote.interface';
+import { StockSymbolTwo } from '../../models/stockSymbolAndQuote.interface';
 import { StockTrackerService } from '../../services/stock-tracker.service';
 
 @Component({
@@ -12,7 +12,7 @@ import { StockTrackerService } from '../../services/stock-tracker.service';
 })
 export class StockTrackerComponent implements OnInit, OnDestroy {
   stockForm: FormGroup;
-  companyStockCombined: StockSymbolAndQuote[] = [];
+  companyStockCombined: StockSymbolTwo[] = [];
   localStorageKey = 'stockSymbolAndQuote';
   destroy$: Subject<boolean> = new Subject<boolean>();
 
@@ -29,7 +29,7 @@ export class StockTrackerComponent implements OnInit, OnDestroy {
   getSymbols() {
     const localStorageSymbols = localStorage.getItem(this.localStorageKey);
     if (localStorageSymbols) {
-      this.companyStockCombined = JSON.parse(localStorageSymbols) as StockSymbolAndQuote[];
+      this.companyStockCombined = JSON.parse(localStorageSymbols) as StockSymbolTwo[];
     }
   }
 
@@ -45,8 +45,11 @@ export class StockTrackerComponent implements OnInit, OnDestroy {
       .pipe(
         takeUntil(this.destroy$),
         tap(([symbol, quote]) => {
-          const companyAndQuote: StockSymbolAndQuote = { ...symbol.result[0], ...quote };
-          this.companyStockCombined = [...this.companyStockCombined, companyAndQuote];
+          const stockSymbol:StockSymbolTwo = {
+            stockSymbol: symbol.result[0],
+            quote: quote
+          }
+          this.companyStockCombined = [...this.companyStockCombined, stockSymbol];
           localStorage.setItem(this.localStorageKey, JSON.stringify(this.companyStockCombined));
           this.stockForm.reset();
         })
@@ -60,7 +63,7 @@ export class StockTrackerComponent implements OnInit, OnDestroy {
   }
 
   removeSymbol(symbol: string) {
-    const index = this.companyStockCombined.findIndex(companyAndQuote => companyAndQuote.symbol === symbol);
+    const index = this.companyStockCombined.findIndex(companyAndQuote => companyAndQuote.stockSymbol.symbol === symbol);
     if (index >= 0) {
       this.companyStockCombined.splice(index, 1);
       localStorage.setItem('stockSymbolAndQuote', JSON.stringify(this.companyStockCombined));
@@ -70,9 +73,9 @@ export class StockTrackerComponent implements OnInit, OnDestroy {
   duplicateSymbolValidator(control: FormControl) {
     if (!control.value) return null;
     const localStorageSymbols = localStorage.getItem('stockSymbolAndQuote');
-    const stockSymbolsAndQuote: StockSymbolAndQuote[] = localStorageSymbols ? JSON.parse(localStorageSymbols) : [];
+    const stockSymbolsAndQuote: StockSymbolTwo[] = localStorageSymbols ? JSON.parse(localStorageSymbols) : [];
 
-    if (stockSymbolsAndQuote.find(s => s.symbol === control.value.toUpperCase())) {
+    if (stockSymbolsAndQuote.find(s => s.stockSymbol.symbol === control.value.toUpperCase())) {
       return { duplicate: true };
     }
     return null;
