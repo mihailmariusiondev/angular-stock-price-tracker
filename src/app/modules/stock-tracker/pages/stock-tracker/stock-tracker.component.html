@@ -45,7 +45,7 @@
   <!-- Companies stock -->
   <div fxFill fxLayout="row wrap">
     <div fxFlex="25" fxFlex.md="33" fxFlex.sm="50" fxFlex.xs="100" fxLayout="column" class="company-stock-container" *ngFor="let company of companyStockCombined">
-      <app-company-stock-list [company]="company" (removeSymbolEvent)="removeSymbol($event)"></app-company-stock-list>
+      <app-company-stock-item [company]="company" (removeSymbolEvent)="removeSymbol($event)"></app-company-stock-item>
     </div>
   </div>
 
