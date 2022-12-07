@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subject, takeUntil } from 'rxjs';
 import { Sentiment } from '../../models/sentiment';
 import { StockTrackerService } from '../../services/stock-tracker.service';
 
@@ -8,13 +9,13 @@ import { StockTrackerService } from '../../services/stock-tracker.service';
   templateUrl: './company-sentiment.component.html',
   styleUrls: ['./company-sentiment.component.scss']
 })
-export class CompanySentimentComponent implements OnInit {
+export class CompanySentimentComponent implements OnInit, OnDestroy {
+  destroy$: Subject<boolean> = new Subject<boolean>();
 
   sentiments: Sentiment[] = [];
   symbol: string = '';
   companyName: string = '';
   monthNames: string[] = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-
 
   constructor(
     private route: ActivatedRoute,
@@ -25,27 +26,32 @@ export class CompanySentimentComponent implements OnInit {
   ngOnInit() {
     this.symbol = this.route.snapshot.paramMap.get('symbol') || '';
 
-    this.route.queryParams.subscribe(params => {
-      this.companyName = params['companyName'];
-    });
+    this.route.queryParams.pipe(takeUntil(this.destroy$))
+      .subscribe(params => {
+        this.companyName = params['companyName'];
+      });
 
     if (this.symbol && !this.companyName) {
-      this.stockTrackerService.getCompanyName(this.symbol)
+      this.stockTrackerService.getCompanyName(this.symbol).pipe(takeUntil(this.destroy$))
         .subscribe(company => {
           this.companyName = company.description;
         });
     }
 
     if (this.symbol) {
-      this.stockTrackerService.getSentiment(this.symbol)
+      this.stockTrackerService.getSentiment(this.symbol).pipe(takeUntil(this.destroy$))
         .subscribe(sentiment => {
           this.sentiments = sentiment;
         });
     }
   }
 
-
   goBack() {
     this.router.navigate(['..']);
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    this.destroy$.complete();
   }
 }

@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
-import { combineLatest, take, tap } from 'rxjs';
+import { combineLatest, Subject, take, takeUntil, tap } from 'rxjs';
 import { NoWhiteSpaceValidator } from 'src/app/modules/@shared/validators/no-whitespace.validator';
 import { companyAndQuote } from '../../models/companyandquote';
 import { StockTrackerService } from '../../services/stock-tracker.service';
@@ -10,11 +10,12 @@ import { StockTrackerService } from '../../services/stock-tracker.service';
   templateUrl: './stock-tracker.component.html',
   styleUrls: ['./stock-tracker.component.scss'],
 })
-export class StockTrackerComponent implements OnInit {
+export class StockTrackerComponent implements OnInit, OnDestroy {
   isLoading = false;
   stockForm: FormGroup;
   companyStockCombined: companyAndQuote[] = [];
   localStorageKey = 'companiesAndQuotes';
+  destroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor(private fb: FormBuilder, private stockTrackerService: StockTrackerService) {
     this.stockForm = fb.group({
@@ -40,8 +41,10 @@ export class StockTrackerComponent implements OnInit {
     let company$ = this.stockTrackerService.getCompanyName(stockSymbol).pipe(take(1));
     let quote$ = this.stockTrackerService.getQuote(stockSymbol).pipe(take(1));
 
+    // Merge both observables into one single object and store the data in localStorage
     combineLatest([company$, quote$])
       .pipe(
+        takeUntil(this.destroy$),
         tap(([quote, company]) => {
           const companyAndQuote: companyAndQuote = { ...quote, ...company };
           this.companyStockCombined = [...this.companyStockCombined, companyAndQuote];
@@ -50,9 +53,7 @@ export class StockTrackerComponent implements OnInit {
         })
       )
       .subscribe();
-    ;
   }
-
 
   removeSymbol(symbol: string) {
     const index = this.companyStockCombined.findIndex(companyAndQuote => companyAndQuote.symbol === symbol);
@@ -71,6 +72,11 @@ export class StockTrackerComponent implements OnInit {
       return { duplicate: true };
     }
     return null;
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    this.destroy$.complete();
   }
 
 }
