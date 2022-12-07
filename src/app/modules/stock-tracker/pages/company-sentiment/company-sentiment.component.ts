@@ -32,7 +32,7 @@ export class CompanySentimentComponent implements OnInit, OnDestroy {
       });
 
     if (this.symbol && !this.companyName) {
-      this.stockTrackerService.getSymbol(this.symbol).pipe(takeUntil(this.destroy$))
+      this.stockTrackerService.searchBySymbol(this.symbol).pipe(takeUntil(this.destroy$))
         .subscribe(symbol => {
           this.companyName = symbol.result[0].description;
         });
