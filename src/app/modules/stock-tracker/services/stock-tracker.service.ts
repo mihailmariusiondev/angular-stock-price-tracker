@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { Quote } from '../models/quote.interface';
 import { SymbolResult } from '../models/symbol.interface';
 import { InsiderSentiment } from '../models/insiderSentiment.interface';
