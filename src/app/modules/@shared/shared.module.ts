@@ -3,13 +3,16 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '../material/material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { SpinnerComponent } from './components/spinner/spinner.component';
 
-
+import { COMPONENTS } from './components';
+import { DIRECTIVES } from './directives';
+import { PIPES } from './pipes';
 
 @NgModule({
   declarations: [
-    SpinnerComponent
+    COMPONENTS,
+    DIRECTIVES,
+    PIPES
   ],
   imports: [
     CommonModule,
@@ -25,8 +28,9 @@ import { SpinnerComponent } from './components/spinner/spinner.component';
     FormsModule,
     ReactiveFormsModule,
 
-    // Components
-    SpinnerComponent
+    COMPONENTS,
+    DIRECTIVES,
+    PIPES
   ]
 })
 export class SharedModule { }
