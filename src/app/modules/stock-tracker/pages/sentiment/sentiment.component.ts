@@ -5,11 +5,11 @@ import { StockTrackerService } from '@stock-tracker/services/stock-tracker.servi
 import { Subject, takeUntil } from 'rxjs';
 
 @Component({
-  selector: 'app-company-sentiment',
-  templateUrl: './company-sentiment.component.html',
-  styleUrls: ['./company-sentiment.component.scss']
+  selector: 'app-sentiment',
+  templateUrl: './sentiment.component.html',
+  styleUrls: ['./sentiment.component.scss']
 })
-export class CompanySentimentComponent implements OnInit, OnDestroy {
+export class SentimentComponent implements OnInit, OnDestroy {
 
   destroy$: Subject<boolean> = new Subject<boolean>();
   sentiments: Sentiment[] = [];

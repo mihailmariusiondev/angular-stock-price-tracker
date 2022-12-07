@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CompanySentimentComponent } from './pages/company-sentiment/company-sentiment.component';
+import { SentimentComponent } from './pages/sentiment/sentiment.component';
 import { StockTrackerComponent } from './pages/stock-tracker/stock-tracker.component';
 
 const routes: Routes = [
@@ -10,7 +10,7 @@ const routes: Routes = [
   },
   {
     path: 'sentiment/:symbol',
-    component: CompanySentimentComponent,
+    component: SentimentComponent,
   }
 ];
 
