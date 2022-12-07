@@ -55,6 +55,11 @@ export class StockTrackerComponent implements OnInit, OnDestroy {
       .subscribe();
   }
 
+  removeAllSymbols(){
+    localStorage.removeItem('companiesAndQuotes');
+    this.companyStockCombined = []
+  }
+
   removeSymbol(symbol: string) {
     const index = this.companyStockCombined.findIndex(companyAndQuote => companyAndQuote.symbol === symbol);
     if (index >= 0) {
