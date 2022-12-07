@@ -11,10 +11,9 @@ import { StockTrackerService } from '../../services/stock-tracker.service';
   styleUrls: ['./stock-tracker.component.scss'],
 })
 export class StockTrackerComponent implements OnInit, OnDestroy {
-  isLoading = false;
   stockForm: FormGroup;
   companyStockCombined: StockSymbolAndQuote[] = [];
-  localStorageKey = 'companiesAndQuotes';
+  localStorageKey = 'stockSymbolAndQuote';
   destroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor(private fb: FormBuilder, private stockTrackerService: StockTrackerService) {
@@ -56,7 +55,7 @@ export class StockTrackerComponent implements OnInit, OnDestroy {
   }
 
   removeAllSymbols(){
-    localStorage.removeItem('companiesAndQuotes');
+    localStorage.removeItem('stockSymbolAndQuote');
     this.companyStockCombined = []
   }
 
@@ -64,16 +63,16 @@ export class StockTrackerComponent implements OnInit, OnDestroy {
     const index = this.companyStockCombined.findIndex(companyAndQuote => companyAndQuote.symbol === symbol);
     if (index >= 0) {
       this.companyStockCombined.splice(index, 1);
-      localStorage.setItem('companiesAndQuotes', JSON.stringify(this.companyStockCombined));
+      localStorage.setItem('stockSymbolAndQuote', JSON.stringify(this.companyStockCombined));
     }
   }
 
   duplicateSymbolValidator(control: FormControl) {
     if (!control.value) return null;
-    const localStorageSymbols = localStorage.getItem('companiesAndQuotes');
-    const symbols: StockSymbolAndQuote[] = localStorageSymbols ? JSON.parse(localStorageSymbols) : [];
+    const localStorageSymbols = localStorage.getItem('stockSymbolAndQuote');
+    const stockSymbolsAndQuote: StockSymbolAndQuote[] = localStorageSymbols ? JSON.parse(localStorageSymbols) : [];
 
-    if (symbols.find(s => s.symbol === control.value.toUpperCase())) {
+    if (stockSymbolsAndQuote.find(s => s.symbol === control.value.toUpperCase())) {
       return { duplicate: true };
     }
     return null;
