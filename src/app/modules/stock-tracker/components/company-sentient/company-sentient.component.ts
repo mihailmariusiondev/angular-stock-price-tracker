@@ -36,6 +36,6 @@ export class CompanySentientComponent implements OnInit {
   }
 
   goBack() {
-    this.router.navigate(['/stock-tracker']);
+    this.router.navigate(['..']);
   }
 }
