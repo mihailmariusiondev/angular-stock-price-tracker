@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Sentiment } from '../models/sentiment.interface';
+import { SentimentFake } from '../models/sentiment.interface';
 import { Quote } from '../models/quote.interface';
 import { SymbolResult } from '../models/symbol.interface';
 
@@ -34,7 +34,7 @@ export class StockTrackerService {
   }
 
 
-  getInsiderSentiment(symbol: string): Observable<Sentiment[]> {
+  getInsiderSentiment(symbol: string): Observable<SentimentFake[]> {
     const currentDate = new Date();
     const currentMonth = currentDate.getMonth() + 1;
     const currentYear = currentDate.getFullYear();
@@ -60,7 +60,7 @@ export class StockTrackerService {
         to
       }
     }).pipe(
-      map((response: any) => response.data as Sentiment[])
+      map((response: any) => response.data as SentimentFake[])
     );
   }
 

@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
-import { Sentiment } from '../../models/sentiment.interface';
+import { SentimentFake } from '../../models/sentiment.interface';
 import { StockTrackerService } from '../../services/stock-tracker.service';
 
 @Component({
@@ -12,7 +12,7 @@ import { StockTrackerService } from '../../services/stock-tracker.service';
 export class CompanySentimentComponent implements OnInit, OnDestroy {
 
   destroy$: Subject<boolean> = new Subject<boolean>();
-  sentiments: Sentiment[] = [];
+  sentiments: SentimentFake[] = [];
   symbol = '';
   companyName = '';
   monthNames: string[] = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];

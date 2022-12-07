@@ -1,4 +1,4 @@
-export interface Sentiment {
+export interface SentimentFake {
   symbol: string;
   year: number;
   month: number;
