@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Sentiment } from '../models/sentiment';
-import { Company } from '../models/company';
 import { Quote } from '../models/quote';
 import { SymbolResult } from '../models/symbol.interface';
 

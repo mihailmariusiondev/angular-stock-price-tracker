@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { combineLatest, Subject, take, takeUntil, tap } from 'rxjs';
 import { NoWhiteSpaceValidator } from 'src/app/modules/@shared/validators/no-whitespace.validator';
-import { CompanyAndQuote } from '../../models/companyandquote';
+import { StockSymbolAndQuote } from '../../models/companyandquote';
 import { StockTrackerService } from '../../services/stock-tracker.service';
 
 @Component({
@@ -13,7 +13,7 @@ import { StockTrackerService } from '../../services/stock-tracker.service';
 export class StockTrackerComponent implements OnInit, OnDestroy {
   isLoading = false;
   stockForm: FormGroup;
-  companyStockCombined: CompanyAndQuote[] = [];
+  companyStockCombined: StockSymbolAndQuote[] = [];
   localStorageKey = 'companiesAndQuotes';
   destroy$: Subject<boolean> = new Subject<boolean>();
 
@@ -30,7 +30,7 @@ export class StockTrackerComponent implements OnInit, OnDestroy {
   getSymbols() {
     const localStorageSymbols = localStorage.getItem(this.localStorageKey);
     if (localStorageSymbols) {
-      this.companyStockCombined = JSON.parse(localStorageSymbols) as CompanyAndQuote[];
+      this.companyStockCombined = JSON.parse(localStorageSymbols) as StockSymbolAndQuote[];
     }
   }
 
@@ -46,7 +46,7 @@ export class StockTrackerComponent implements OnInit, OnDestroy {
       .pipe(
         takeUntil(this.destroy$),
         tap(([symbol, quote]) => {
-          const companyAndQuote: CompanyAndQuote = { ...symbol.result[0], ...quote };
+          const companyAndQuote: StockSymbolAndQuote = { ...symbol.result[0], ...quote };
           this.companyStockCombined = [...this.companyStockCombined, companyAndQuote];
           localStorage.setItem(this.localStorageKey, JSON.stringify(this.companyStockCombined));
           this.stockForm.reset();
@@ -66,7 +66,7 @@ export class StockTrackerComponent implements OnInit, OnDestroy {
   duplicateSymbolValidator(control: FormControl) {
     if (!control.value) return null;
     const localStorageSymbols = localStorage.getItem('companiesAndQuotes');
-    const symbols: CompanyAndQuote[] = localStorageSymbols ? JSON.parse(localStorageSymbols) : [];
+    const symbols: StockSymbolAndQuote[] = localStorageSymbols ? JSON.parse(localStorageSymbols) : [];
 
     if (symbols.find(s => s.symbol === control.value.toUpperCase())) {
       return { duplicate: true };
