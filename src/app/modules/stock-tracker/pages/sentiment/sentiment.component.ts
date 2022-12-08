@@ -15,7 +15,6 @@ export class SentimentComponent implements OnInit, OnDestroy {
   sentiments: Sentiment[] = [];
   symbol = '';
   companyName = '';
-  monthNames: string[] = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
   constructor(
     private route: ActivatedRoute,

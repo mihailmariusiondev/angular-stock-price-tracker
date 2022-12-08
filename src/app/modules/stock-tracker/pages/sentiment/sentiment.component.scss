@@ -1,48 +1,20 @@
-.change-positive {
-  color: rgba(0, 128, 0, 0.5);
-}
-
-.change-negative {
-  color: rgb(255, 0, 0, 0.5);
-}
-
 .sentiment-card {
   margin-top: 20px;
   margin-left: 10px;
   margin-right: 10px;
 }
 
-.company-sentient-item-card {
-  margin-top: 20px;
-  margin-left: 10px;
-  margin-right: 10px;
-  min-height: 130px;
-}
-
 .sentiment-card-header {
   margin-bottom: 10px
-}
-
-.icon-trending {
-  transform: scale(3);
-}
-
-.company-sentient-title {
-  margin-top: 10px;
 }
 
 .company-sentiment-back-btn {
   margin-top: 20px
 }
 
-.company-sentiment-data {
-  padding: 20px;
-}
-
-.company-sentiment-data-date {
-  font-size: 20px
-}
-
-.company-sentiment-data-change-mspr {
-  font-size: 14px
+.sentiment-card-item-no-data {
+  margin-top: 20px;
+  margin-left: 10px;
+  margin-right: 10px;
+  min-height: 130px;
 }

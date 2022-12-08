@@ -1,0 +1,30 @@
+.company-sentient-item-card {
+  margin-top: 20px;
+  margin-left: 10px;
+  margin-right: 10px;
+  min-height: 130px;
+}
+
+.change-positive {
+  color: rgba(0, 128, 0, 0.5);
+}
+
+.change-negative {
+  color: rgb(255, 0, 0, 0.5);
+}
+
+.icon-trending {
+  transform: scale(3);
+}
+
+.company-sentiment-data {
+  padding: 20px;
+}
+
+.company-sentiment-data-date {
+  font-size: 20px
+}
+
+.company-sentiment-data-change-mspr {
+  font-size: 14px
+}

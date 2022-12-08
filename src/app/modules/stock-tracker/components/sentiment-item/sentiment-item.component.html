@@ -1,0 +1,20 @@
+<mat-card fxLayout="row" class="company-sentient-item-card">
+  <div fxLayout="column" fxFlex="65%" fxLayoutGap="15px" class="company-sentiment-data">
+    <div fxLayout="row">
+      <span class="company-sentiment-data-date"><b>{{ (monthNames[sentiment.month - 1] + ' ' + sentiment.year.toString()) }}</b></span>
+    </div>
+    <div fxLayout="row">
+      <span class="company-sentiment-data-change-mspr"><b>Change</b>: {{ sentiment.change }}</span>
+    </div>
+    <div fxLayout="row">
+      <span class="company-sentiment-data-change-mspr"><b>Mspr</b>: {{ sentiment.mspr }}</span>
+    </div>
+  </div>
+
+  <div fxLayout="column" fxFlex="35%" fxLayoutAlign="center center">
+    <div [ngSwitch]="sentiment.change > 0">
+      <mat-icon *ngSwitchCase="true" class="icon-trending change-positive">trending_up</mat-icon>
+      <mat-icon *ngSwitchCase="false" class="icon-trending change-negative">trending_down</mat-icon>
+    </div>
+  </div>
+</mat-card>

@@ -5,13 +5,15 @@ import { CompanyStockItemComponent } from '@stock-tracker/components/company-sto
 import { SentimentComponent } from './pages/sentiment/sentiment.component';
 import { StockTrackerComponent } from '@stock-tracker/pages/stock-tracker/stock-tracker.component';
 import { StockTrackerRoutingModule } from '@stock-tracker/stock-tracker-routing.module';
+import { SentimentItemComponent } from './components/sentiment-item/sentiment-item.component';
 
 
 @NgModule({
   declarations: [
     StockTrackerComponent,
     CompanyStockItemComponent,
-    SentimentComponent
+    SentimentComponent,
+    SentimentItemComponent
   ],
   imports: [
     SharedModule,
