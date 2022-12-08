@@ -1,60 +1,51 @@
 <div fxLayout="column">
 
-    <div fxLayout="column" fxFlex="80%" fxLayoutGap="10px">
+  <mat-card fxLayout="column" fxLayoutAlign="center center" class="sentiment-card">
 
-      <!-- Card title -->
-      <div fxLayout="row" fxFlexFill fxLayoutAlign="center center" class="company-sentient-title">
-        <mat-card-title> <strong>({{symbol}}) {{companyName}}</strong> </mat-card-title>
-      </div>
+    <mat-card-header>
+      <mat-card-title> <strong>({{symbol}}) {{companyName}}</strong> </mat-card-title>
+      <mat-card-subtitle><b>Note</b>: some companies may not have sentiment data or may only have data for the last one or two months.</mat-card-subtitle>
+    </mat-card-header>
 
-      <div fxLayout="row" fxFlexFill fxLayoutAlign="center center">
-        <mat-card-subtitle>
-          <span><b>Note</b>: some companies may not have sentiment data or may only have data for the last one or two months.</span>
-        </mat-card-subtitle>
-      </div>
+  </mat-card>
 
-      <ng-container *ngIf="sentiments.length > 0; else noSentimentsTemplate">
 
-        <!-- Card content -->
-        <div fxLayout="row" fxFlexFill fxLayoutAlign="center center" class="company-sentient-card">
-          <mat-card fxLayout="column" [fxFlex]="sentiments.length === 1 ? '100%' : sentiments.length === 2 ? '50%' : '33%'" class="sentiment-item" *ngFor="let sentiment of sentiments">
-            <div fxLayout="row">
+  <div fxFill fxLayout="row wrap">
+      <div fxFlex="25" fxFlex.md="33" fxFlex.sm="50" fxFlex.xs="100" fxLayout="column" class="company-stock-item" *ngFor="let number of [0,1,2]; let i = index">
 
-              <div fxLayout="column" fxFlex="65%" fxLayoutGap="15px" class="company-sentiment-data">
-                <div fxLayout="row" fxFlexFil>
-                  <span class="company-sentiment-data-date"><b>{{ (monthNames[sentiment.month - 1] + ' ' + sentiment.year.toString()) }}</b></span>
-                </div>
-                <div fxLayout="row" fxFlexFil>
-                  <span class="company-sentiment-data-change-mspr"><b>Change</b>: {{ sentiment.change }}</span>
-                </div>
-                <div fxLayout="row" fxFlexFil>
-                  <span class="company-sentiment-data-change-mspr"><b>Mspr</b>: {{ sentiment.mspr }}</span>
-                </div>
+        <ng-container *ngIf="sentiments[i]; else noSentimentsTemplate">
+          <mat-card fxLayout="row" class="company-sentient-item-card">
+            <div fxLayout="column" fxFlex="65%" fxLayoutGap="15px" class="company-sentiment-data">
+              <div fxLayout="row">
+                <span class="company-sentiment-data-date"><b>{{ (monthNames[sentiments[i].month - 1] + ' ' + sentiments[i].year.toString()) }}</b></span>
               </div>
+              <div fxLayout="row">
+                <span class="company-sentiment-data-change-mspr"><b>Change</b>: {{ sentiments[i].change }}</span>
+              </div>
+              <div fxLayout="row">
+                <span class="company-sentiment-data-change-mspr"><b>Mspr</b>: {{ sentiments[i].mspr }}</span>
+              </div>
+            </div>
 
-              <div fxFlex="35%" fxLayout="column" fxLayoutAlign="center center">
-                <div [ngSwitch]="sentiment.change > 0">
-                  <mat-icon *ngSwitchCase="true" class="icon-trending change-positive">trending_up</mat-icon>
-                  <mat-icon *ngSwitchCase="false" class="icon-trending change-negative">trending_down</mat-icon>
-                </div>
+            <div fxLayout="column" fxFlex="35%" fxLayoutAlign="center center">
+              <div [ngSwitch]="sentiments[i].change > 0">
+                <mat-icon *ngSwitchCase="true" class="icon-trending change-positive">trending_up</mat-icon>
+                <mat-icon *ngSwitchCase="false" class="icon-trending change-negative">trending_down</mat-icon>
               </div>
             </div>
           </mat-card>
-        </div>
-
-      </ng-container>
-      <ng-template #noSentimentsTemplate>
-        <mat-card fxLayout="column" class="sentiment-item company-sentient-card" fxLayoutAlign="center center">
+        </ng-container>
+        <ng-template #noSentimentsTemplate>
+          <mat-card fxLayout="row" fxLayoutAlign="center center" class="company-sentient-item-card">
             No data available
-        </mat-card>
+          </mat-card>
+        </ng-template>
 
-      </ng-template>
-
-      <div fxLayout="row" fxLayoutAlign="start center" fxFlex="100%" class="company-sentiment-back-btn">
-        <mat-icon>chevron_left</mat-icon>
-        <button id="backBtn" mat-button (click)="goBack()">Back</button>
       </div>
+  </div>
 
-    </div>
-
+  <div fxLayout="row" fxLayoutAlign="start center" fxFlex="100%" class="company-sentiment-back-btn">
+    <mat-icon>chevron_left</mat-icon>
+    <button id="backBtn" mat-button (click)="goBack()">Back</button>
+  </div>
 </div>
