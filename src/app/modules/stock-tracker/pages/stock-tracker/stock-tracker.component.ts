@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { LocalStorageService } from '@core/services/local-storage.service';
 import { DuplicateSymbolValidator } from '@shared/validators/duplicate-symbol.validator';
 import { NoWhiteSpaceValidator } from '@shared/validators/no-whitespace.validator';
@@ -21,15 +21,15 @@ export class StockTrackerComponent implements OnInit, OnDestroy {
   constructor(private fb: FormBuilder, private stockTrackerService: StockTrackerService, private localStorageService: LocalStorageService) {
     const duplicateSymbolValidator = new DuplicateSymbolValidator(this.localStorageService);
     this.stockForm = fb.group({
-      symbol: ['',
-        [
-          Validators.required,
-          Validators.minLength(1),
-          Validators.maxLength(5),
-          duplicateSymbolValidator.duplicateSymbolValidator(this.localStorageKey),
-          NoWhiteSpaceValidator.whiteSpace()
-        ]
-      ]
+      symbol: new FormControl('', { validators: [
+            Validators.required,
+            Validators.minLength(1),
+            Validators.maxLength(5),
+            duplicateSymbolValidator.duplicateSymbolValidator(this.localStorageKey),
+            NoWhiteSpaceValidator.whiteSpace()
+          ],
+          // updateOn: 'change'
+        }),
     });
   }
 
