@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { LocalStorageService } from '@core/services/local-storage.service';
 import { NoWhiteSpaceValidator } from '@shared/validators/no-whitespace.validator';
 import { StockSymbolQuote } from '@stock-tracker/models/stockSymbolAndQuote.interface';
 import { StockTrackerService } from '@stock-tracker/services/stock-tracker.service';
@@ -16,9 +17,11 @@ export class StockTrackerComponent implements OnInit, OnDestroy {
   localStorageKey = 'stockSymbolAndQuote';
   destroy$: Subject<boolean> = new Subject<boolean>();
 
-  constructor(private fb: FormBuilder, private stockTrackerService: StockTrackerService) {
+  constructor(private fb: FormBuilder,
+     private stockTrackerService: StockTrackerService,
+     private localStorageService: LocalStorageService) {
     this.stockForm = fb.group({
-      symbol: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(5), this.duplicateSymbolValidator, NoWhiteSpaceValidator.whiteSpace()]]
+      symbol: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(5), this.duplicateSymbolValidator], [NoWhiteSpaceValidator.whiteSpace()]]
     });
   }
 
@@ -26,8 +29,9 @@ export class StockTrackerComponent implements OnInit, OnDestroy {
     this.getSymbols();
   }
 
+
   getSymbols() {
-    const localStorageSymbols = localStorage.getItem(this.localStorageKey);
+    const localStorageSymbols = this.localStorageService.getItem(this.localStorageKey);
     if (localStorageSymbols) {
       this.companyStockCombined = JSON.parse(localStorageSymbols) as StockSymbolQuote[];
     }
@@ -50,7 +54,7 @@ export class StockTrackerComponent implements OnInit, OnDestroy {
             quote: quote
           };
           this.companyStockCombined = [...this.companyStockCombined, stockSymbol];
-          localStorage.setItem(this.localStorageKey, JSON.stringify(this.companyStockCombined));
+          this.localStorageService.setItem(this.localStorageKey, JSON.stringify(this.companyStockCombined));
           this.stockForm.reset();
         })
       )
@@ -58,7 +62,7 @@ export class StockTrackerComponent implements OnInit, OnDestroy {
   }
 
   removeAllSymbols() {
-    localStorage.removeItem('stockSymbolAndQuote');
+    this.localStorageService.removeItem(this.localStorageKey);
     this.companyStockCombined = [];
   }
 
@@ -66,13 +70,13 @@ export class StockTrackerComponent implements OnInit, OnDestroy {
     const index = this.companyStockCombined.findIndex(companyAndQuote => companyAndQuote.stockSymbol.symbol === symbol);
     if (index >= 0) {
       this.companyStockCombined.splice(index, 1);
-      localStorage.setItem('stockSymbolAndQuote', JSON.stringify(this.companyStockCombined));
+      this.localStorageService.setItem(this.localStorageKey, JSON.stringify(this.companyStockCombined));
     }
   }
 
   duplicateSymbolValidator(control: FormControl) {
     if (!control.value) return null;
-    const localStorageSymbols = localStorage.getItem('stockSymbolAndQuote');
+    const localStorageSymbols = this.localStorageService.getItem(this.localStorageKey);
     const stockSymbolsAndQuote: StockSymbolQuote[] = localStorageSymbols ? JSON.parse(localStorageSymbols) : [];
 
     if (stockSymbolsAndQuote.find(s => s.stockSymbol.symbol === control.value.toUpperCase())) {
