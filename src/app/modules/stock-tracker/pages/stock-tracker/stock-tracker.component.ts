@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LocalStorageService } from '@core/services/local-storage.service';
 import { DuplicateSymbolValidator } from '@shared/validators/duplicate-symbol.validator';
 import { NoWhiteSpaceValidator } from '@shared/validators/no-whitespace.validator';
