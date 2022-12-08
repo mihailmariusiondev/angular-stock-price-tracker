@@ -7,8 +7,8 @@
       <mat-card-subtitle>Enter the symbol of a stock to trag (i.e. AAPL., TSLA., GOOGL). <strong>Note</strong> the query will return the first result that matches the symbol of a stock</mat-card-subtitle>
     </mat-card-header>
 
-    <mat-card-actions>
-      <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="50px" fxLayoutGap.lt-sm="10px" fxLayoutAlign="center center" class="form-container">
+    <mat-card-actions class="stock-tracker-card-actions">
+      <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="50px" fxLayoutGap.lt-sm="10px" fxLayoutAlign="center center">
           <form [formGroup]="stockForm">
             <mat-form-field appearance="outline" class="input-headline">
               <input id="stockInput" matInput placeholder="Enter stock symbol" formControlName="symbol" />
