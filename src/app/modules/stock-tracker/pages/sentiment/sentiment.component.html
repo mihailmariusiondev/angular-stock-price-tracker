@@ -10,7 +10,7 @@
   </mat-card>
 
   <div fxFill fxLayout="row wrap">
-      <div fxFlex="25" fxFlex.md="33" fxFlex.sm="50" fxFlex.xs="100" fxLayout="column" class="company-stock-item" *ngFor="let number of [0,1,2]; let i = index">
+      <div fxFlex="25" fxFlex.md="33" fxFlex.sm="100" fxFlex.xs="100" fxLayout="column" class="company-stock-item" *ngFor="let number of [0,1,2]; let i = index">
 
         <ng-container *ngIf="sentiments[i]; else noSentimentsTemplate">
           <app-sentiment-item [sentiment]="sentiments[i]"></app-sentiment-item>
