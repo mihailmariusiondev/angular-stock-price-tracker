@@ -18,21 +18,21 @@ export class StockTrackerComponent implements OnInit, OnDestroy {
   localStorageKey = 'stockSymbolAndQuote';
   destroy$: Subject<boolean> = new Subject<boolean>();
 
-  constructor(private fb: FormBuilder,
-    private stockTrackerService: StockTrackerService,
-    private localStorageService: LocalStorageService) {
+  constructor(private fb: FormBuilder, private stockTrackerService: StockTrackerService, private localStorageService: LocalStorageService) {
+    const duplicateSymbolValidator = new DuplicateSymbolValidator(this.localStorageService);
     this.stockForm = fb.group({
       symbol: ['',
         [
           Validators.required,
           Validators.minLength(1),
           Validators.maxLength(5),
-          DuplicateSymbolValidator.duplicateSymbolValidator(this.localStorageKey, this.localStorageService),
+          duplicateSymbolValidator.duplicateSymbolValidator(this.localStorageKey),
           NoWhiteSpaceValidator.whiteSpace()
         ]
       ]
     });
   }
+
 
   ngOnInit() {
     this.getSymbols();
