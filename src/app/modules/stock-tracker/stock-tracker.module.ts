@@ -6,6 +6,7 @@ import { SentimentComponent } from './pages/sentiment/sentiment.component';
 import { StockTrackerComponent } from '@stock-tracker/pages/stock-tracker/stock-tracker.component';
 import { StockTrackerRoutingModule } from '@stock-tracker/stock-tracker-routing.module';
 import { SentimentItemComponent } from './components/sentiment-item/sentiment-item.component';
+import { MyTreeComponent } from './components/my-tree/my-tree.component';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { SentimentItemComponent } from './components/sentiment-item/sentiment-it
     StockTrackerComponent,
     CompanyStockItemComponent,
     SentimentComponent,
-    SentimentItemComponent
+    SentimentItemComponent,
+    MyTreeComponent
   ],
   imports: [
     SharedModule,
