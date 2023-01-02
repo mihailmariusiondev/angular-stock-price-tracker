@@ -1,31 +1,13 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { FlatTreeControl } from '@angular/cdk/tree';
-import { MatTreeFlattener, MatTreeFlatDataSource, MatTree } from '@angular/material/tree';
+import { MatTreeFlattener, MatTreeFlatDataSource } from '@angular/material/tree';
+import { RandomUserService } from '@stock-tracker/services/random-user.service';
+import { RandomUser } from '@stock-tracker/models/randomuser.interface';
 
-interface FoodNode {
-  name: string;
-  children?: FoodNode[];
+class Node {
+  name!: string;
+  children?: Node[];
 }
-
-const TREE_DATA: FoodNode[] = [
-  {
-    name: 'Fruit',
-    children: [{name: 'Apple'}, {name: 'Banana'}, {name: 'Fruit loops'}],
-  },
-  {
-    name: 'Vegetables',
-    children: [
-      {
-        name: 'Green',
-        children: [{name: 'Broccoli'}, {name: 'Brussels sprouts'}],
-      },
-      {
-        name: 'Orange',
-        children: [{name: 'Pumpkins'}, {name: 'Carrots'}],
-      },
-    ],
-  },
-];
 
 interface ExampleFlatNode {
   expandable: boolean;
@@ -38,10 +20,8 @@ interface ExampleFlatNode {
   templateUrl: './my-tree.component.html',
   styleUrls: ['./my-tree.component.scss']
 })
-export class MyTreeComponent implements AfterViewInit {
-  @ViewChild('tree') tree!: MatTree<FoodNode>;
-
-  private _transformer = (node: FoodNode, level: number) => {
+export class MyTreeComponent {
+  private _transformer = (node: Node, level: number) => {
     return {
       expandable: !!node.children && node.children.length > 0,
       name: node.name,
@@ -63,14 +43,30 @@ export class MyTreeComponent implements AfterViewInit {
 
   dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
 
-  constructor() {
-    this.dataSource.data = TREE_DATA;
+  constructor(private randomUserService: RandomUserService) {
+    this.randomUserService.getRandomUser().subscribe(response => {
+      this.dataSource.data = this.buildFileTree(response, 0);
+    });
   }
 
-  ngAfterViewInit() {
-    this.tree.treeControl.expandAll();
+  buildFileTree(obj: {[key: string]: any}, level: number): Node[] {
+    return Object.keys(obj).reduce<Node[]>((accumulator, key) => {
+      const value = obj[key];
+      const node = new Node();
+      node.name = key;
+
+      if (value != null) {
+        if (typeof value === 'object') {
+          node.children = this.buildFileTree(value, level + 1);
+        } else {
+          node.name = value;
+        }
+      }
+
+      return accumulator.concat(node);
+    }, []);
   }
+
 
   hasChild = (_: number, node: ExampleFlatNode) => node.expandable;
-
 }
