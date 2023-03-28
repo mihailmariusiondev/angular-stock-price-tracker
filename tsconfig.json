@@ -24,9 +24,10 @@
       "dom"
     ],
     "paths": {
-      "@core/*": ["src/app/modules/@core/*"],
-      "@shared/*": ["src/app/modules/@shared/*"],
-      "@stock-tracker/*": ["src/app/modules/stock-tracker/*"],
+      "core/*": ["src/app/core/*"],
+      "shared/*": ["src/app/shared/*"],
+      "stock-tracker/*": ["src/app/modules/stock-tracker/*"],
+      "features/stock-tracker/*": ["src/app/features/stock-tracker/*"],
     }
   },
   "angularCompilerOptions": {

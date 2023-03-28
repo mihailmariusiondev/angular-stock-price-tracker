@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   // Routes (lazy loaded)
-  { path: '', loadChildren: () => import('./modules/stock-tracker/stock-tracker.module').then(m => m.StockTrackerModule) },
+  { path: '', loadChildren: () => import('./features/stock-tracker/stock-tracker.module').then(m => m.StockTrackerModule) },
 
   // Fallback when no prior route is matched
   { path: '**', redirectTo: '', pathMatch: 'full' }
