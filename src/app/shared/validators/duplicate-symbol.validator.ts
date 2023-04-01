@@ -1,5 +1,5 @@
 import { ValidatorFn, AbstractControl } from "@angular/forms";
-import { LocalStorageService } from "core/index";
+import { LocalStorageService } from "core/services/local-storage.service";
 import { StockSymbolQuote } from "shared/models/stockSymbolAndQuote.interface";
 
 

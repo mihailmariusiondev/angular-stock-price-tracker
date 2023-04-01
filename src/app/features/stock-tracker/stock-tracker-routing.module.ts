@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { SentimentGuard } from 'core/index';
+import { SentimentGuard } from 'core/guards/sentiment.guard';
 import { SentimentComponent } from './pages/sentiment/sentiment.component';
-import { StockTrackerComponent } from './pages/stock-tracker/stock-tracker.component';
+import { StockTrackerDashboardComponent } from './pages/stock-tracker-dashboard/stock-tracker-dashboard.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: StockTrackerComponent,
+    component: StockTrackerDashboardComponent,
   },
   {
     path: 'sentiment/:symbol',

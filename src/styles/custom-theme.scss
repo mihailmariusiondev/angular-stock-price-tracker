@@ -1,0 +1,23 @@
+@use '@angular/material' as mat;
+@import '@angular/material/theming';
+
+@import "custom-palette";
+@import "typography";
+
+// Define your custom colors
+$my-primary: mat-palette($my-primary-color, 900);
+$my-accent: mat-palette($my-accent-color, 600);
+$my-warn: mat-palette($my-warn-color, 500);
+
+// Create the custom theme
+$my-theme: mat-light-theme((
+  color: (
+    primary: $my-primary,
+    accent: $my-accent,
+    warn: $my-warn,
+  ),
+  typography: $template-typography,
+));
+
+// Include the custom theme in your app
+@include angular-material-theme($my-theme);

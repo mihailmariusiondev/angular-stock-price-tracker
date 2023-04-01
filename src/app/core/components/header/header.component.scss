@@ -1,0 +1,11 @@
+.container {
+  display: flex;
+  align-items: stretch;
+  flex: 1; /* Change this line */
+  background: rebeccapurple;
+
+}
+
+mat-sidenav {
+  width: 250px;
+}

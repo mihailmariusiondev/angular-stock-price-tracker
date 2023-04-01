@@ -1,18 +1,18 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { LocalStorageService } from 'core/index';
 import { combineLatest, Subject, take, takeUntil, tap } from 'rxjs';
 import { StockSymbolQuote } from 'shared/models/stockSymbolAndQuote.interface';
 import { DuplicateSymbolValidator } from 'shared/validators/duplicate-symbol.validator';
 import { NoWhiteSpaceValidator } from 'shared/validators/no-whitespace.validator';
-import { StockTrackerService } from '../../services/stock-tracker.service';
+import { StockTrackerService } from 'features/stock-tracker/services/stock-tracker.service';
+import { LocalStorageService } from 'core/services/local-storage.service';
 
 @Component({
-  selector: 'app-stock-tracker',
-  templateUrl: './stock-tracker.component.html',
-  styleUrls: ['./stock-tracker.component.scss'],
+  selector: 'app-stock-tracker-dashboard',
+  templateUrl: './stock-tracker-dashboard.component.html',
+  styleUrls: ['./stock-tracker-dashboard.component.scss'],
 })
-export class StockTrackerComponent implements OnInit, OnDestroy {
+export class StockTrackerDashboardComponent implements OnInit, OnDestroy {
   stockForm: FormGroup;
   companyStockCombined: StockSymbolQuote[] = [];
   localStorageKey = 'stockSymbolAndQuote';

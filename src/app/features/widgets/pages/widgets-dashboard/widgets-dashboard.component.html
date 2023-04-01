@@ -1,0 +1,41 @@
+<div class="widgets-container">
+
+  <mat-tab-group mat-align-tabs="start" [selectedIndex]="tabsLoad[0]" (selectedIndexChange)="onChangeTab($event)">
+    <mat-tab label="Colors">
+      <div *ngIf="tabsLoad.includes(0)">
+          <app-widget-color-palette></app-widget-color-palette>
+      </div>
+    </mat-tab>
+
+    <mat-tab label="Typography">
+      <div *ngIf="tabsLoad.includes(1)">
+        <app-widgets-typography></app-widgets-typography>
+      </div>
+    </mat-tab>
+
+    <mat-tab label="Buttons">
+      <div *ngIf="tabsLoad.includes(2)">
+        <app-widget-buttons></app-widget-buttons>
+      </div>
+    </mat-tab>
+
+    <mat-tab label="Dialogs">
+      <div *ngIf="tabsLoad.includes(3)">
+        <!-- <app-widgets-dialogs></app-widgets-dialogs> -->
+      </div>
+    </mat-tab>
+
+    <mat-tab label="Snippets">
+      <div *ngIf="tabsLoad.includes(4)">
+        <!-- <app-widgets-snippets></app-widgets-snippets> -->
+      </div>
+    </mat-tab>
+
+    <mat-tab label="Components">
+      <div *ngIf="tabsLoad.includes(5)">
+        <!-- <app-widgets-components></app-widgets-components> -->
+      </div>
+    </mat-tab>
+
+  </mat-tab-group>
+</div>

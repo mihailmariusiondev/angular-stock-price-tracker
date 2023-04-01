@@ -1,0 +1,34 @@
+<mat-sidenav-container fullscreen [hasBackdrop]="false">
+
+  <mat-sidenav #sidenav mode="push" opened>
+    <mat-toolbar color="primary">
+
+      <span>Menú</span>
+
+    </mat-toolbar>
+
+    <mat-nav-list>
+      <a routerLink="./stock-market-management" mat-list-item>
+        <span>Stock Tracker</span>
+      </a>
+      <a routerLink="./widgets-management" mat-list-item>
+        <span>Widgets</span>
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-toolbar color="primary">
+
+    <span>Manolo Perolo</span>
+
+    <span class="spacer"></span>
+    <button mat-button color="primary">
+      Logout
+    </button>
+  </mat-toolbar>
+
+  <div class="container">
+    <router-outlet></router-outlet>
+  </div>
+
+</mat-sidenav-container>
